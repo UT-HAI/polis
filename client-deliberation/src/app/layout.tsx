@@ -4,6 +4,7 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'theme-ui'
 import theme from '../components/theme'
+import InteriorHeader from '../components/InteriorHeader'
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -18,7 +19,11 @@ export default function RootLayout({
   return (
     <ThemeProvider theme={theme}>
       <html lang="en">
-        <body>{children}</body>
+        <body>
+          <InteriorHeader>
+            {children}
+          </InteriorHeader>
+        </body>
       </html>
     </ThemeProvider>
   )
