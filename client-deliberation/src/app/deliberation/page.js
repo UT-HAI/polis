@@ -8,8 +8,7 @@ import { Box, Heading, Text } from 'theme-ui'
 // import Url from '../../util/url'
 
 // @connect((state) => state.user)
-class Integrate extends React.Component {
-  render() {
+export default function Deliberation() {
     // const userSiteId = this.props.user === null
     //  ? '__loading, try refreshing__'
     //  : this.props.user.site_ids[0];
@@ -24,28 +23,20 @@ class Integrate extends React.Component {
               lineHeight: 'body',
               mb: [3, null, 4]
             }}>
-            Integrate
+            Deliberation
           </Heading>
           <Text>
-            Copy and paste this code into your content management template. Each
-            page (article, post) requires a unique string in the
-            &quot;PAGE_ID&quot; field. This should be consistent over time and
-            unique to each of your pages (like the article title).
+            Welcome to Pol.is, a real-time system for gathering, analyzing and understanding what large groups of people think in their own words, enabled by advanced statistics and machine learning.
           </Text>
           <ul>
             <li>
-              When this embed code loads on your website, it will either create
-              a new conversation (if one is not already associated with the
-              string passed into PAGE_ID) or load an existing conversation.
+              This is a sample page that is served using Next.js.
             </li>
             <li>
-              This embed code will keep track of what conversations belongs on
-              what pages via the data-page_id HTML attribute.
+              It uses React, and a library called theme-ui for styling.
             </li>
             <li>
-              Simply replace &quot;PAGE_ID&quot;, either manually or in your
-              templates, to create new conversations and load existing ones in
-              the right place.
+              In the future, it will use React Redux to store state for authentication purposes.
             </li>
           </ul>
           <Box>
@@ -63,7 +54,6 @@ class Integrate extends React.Component {
         </Box>
       </Box>
     )
-  }
 }
 
 // Integrate.propTypes = {
@@ -71,5 +61,3 @@ class Integrate extends React.Component {
 //     site_ids: PropTypes.arrayOf(PropTypes.string)
 //   })
 // }
-
-export default Integrate
