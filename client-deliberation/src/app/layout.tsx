@@ -3,6 +3,8 @@
 // import './globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'theme-ui'
+import { Provider } from 'react-redux'
+import store from '../app/store'
 import theme from '../components/theme'
 import InteriorHeader from '../components/InteriorHeader'
 
@@ -16,15 +18,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <ThemeProvider theme={theme}>
-      <html lang="en">
-        <body>
-          <InteriorHeader>
-            {children}
-          </InteriorHeader>
-        </body>
-      </html>
+      <Provider store={store}>
+        <html lang="en">
+          <body>
+            <InteriorHeader>
+              {children}
+            </InteriorHeader>
+          </body>
+        </html>
+      </Provider>
     </ThemeProvider>
   )
 }

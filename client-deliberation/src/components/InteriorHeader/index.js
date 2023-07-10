@@ -2,7 +2,7 @@
 import { Box, jsx } from 'theme-ui'
 import Link from 'next/link'
 // import { Link } from 'react-router-dom'
-import Logomark from '@/components/framework/logomark'
+import Logomark from '@/components/logomark/'
 
 export default function InteriorHeader({children}) {
     return (

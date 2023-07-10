@@ -5,6 +5,7 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 // import { connect } from 'react-redux'
 import { Box, Heading, Text } from 'theme-ui'
+import Counter from '@/components/counter'
 // import Url from '../../util/url'
 
 // @connect((state) => state.user)
@@ -40,6 +41,7 @@ export default function Deliberation() {
             </li>
           </ul>
           <Box>
+            <Counter/>
             {/* <pre>
               {`
 <div
