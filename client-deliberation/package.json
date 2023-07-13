@@ -1,8 +1,8 @@
 {
-  "name": "polis-client-admin",
+  "name": "polis-client-deliberation",
   "version": "0.0.1",
-  "repository": "github:pol-is/polisClientAdmin",
-  "description": "Polis Admin Console",
+  "repository": "github:pol-is/polisClientDeliberation",
+  "description": "Polis Client Deliberation",
   "scripts": {
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production",
