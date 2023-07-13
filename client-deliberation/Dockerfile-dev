@@ -19,4 +19,4 @@ RUN npm ci --production=false --legacy-peer-deps
 
 COPY . .
 
-CMD npm run dev
+CMD npm start
