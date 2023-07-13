@@ -61,11 +61,11 @@ services:
   #     live-code-reloaded ports
   #   * leave the server pointing to the static builds, but have separate ports you can hit for the live-code
   #     reloading (making sure to document the process)
-  # client-admin:
-  #   build:
-  #     context: ./client-admin
-  #     dockerfile: Dockerfile-dev
-  #     labels:
-  #       polis_tag: ${TAG:-dev}
-  #   ports:
-  #     - "8081:8080" # don't conflict with file-server container
+  client-admin:
+    build:
+      context: ./client-admin
+      dockerfile: Dockerfile-dev
+      labels:
+        polis_tag: ${TAG:-dev}
+    ports:
+      - "8081:8080" # don't conflict with file-server container

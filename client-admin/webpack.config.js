@@ -37,16 +37,14 @@ module.exports = (env, options) => {
     },
     devServer: {
       historyApiFallback: true,
-      /**
       // TODO: Set up API proxy later for server component.
       // See: https://webpack.js.org/configuration/dev-server/#devserverproxy
       proxy: {
         '/api': {
-        target: 'https://pol.is',
+        target: 'http://localhost:8080',
         secure: false,
         },
       },
-      **/
     },
     plugins: [
       new CopyPlugin({
