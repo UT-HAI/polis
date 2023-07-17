@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Flex, Box, Text, Button, jsx } from "theme-ui";
-import { Link } from "react-router-dom";
 
 class StatementForm extends React.Component {
   constructor(props) {
@@ -55,6 +54,7 @@ class StatementForm extends React.Component {
               type="text"
               value={inputValue}
               onChange={this.handleChange}
+              maxLength={400}
             />
           </Box>
           <Flex sx={{ alignItems: "center", justifyContent: "end" }}>
@@ -73,13 +73,8 @@ class StatementForm extends React.Component {
           </Flex>
         </form>
       </Box>
-      // <Button>Submit</Button>
     );
   }
 }
-
-// StatementContainer.propTypes = {
-//     // value: PropTypes.string,
-// }
 
 export default StatementForm;

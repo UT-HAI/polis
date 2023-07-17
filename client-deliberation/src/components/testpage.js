@@ -11,7 +11,7 @@ import OpinionContainer from "./OpinionContainer";
 class TestPage extends React.Component {
   render() {
     return (
-      <Box sx={{ maxWidth: "748px", margin: "auto" }}>
+      <Box sx={{ maxWidth: '768px', margin: 'auto', py: '20px', px: '10px' }}>
         <HexLogo />
         <Title value={"Configuring the HAI Lab Space"} />
         <Subtitle

@@ -36,8 +36,4 @@ class OpinionContainer extends React.Component {
   }
 }
 
-// StatementContainer.propTypes = {
-//     // value: PropTypes.string,
-// }
-
 export default OpinionContainer;

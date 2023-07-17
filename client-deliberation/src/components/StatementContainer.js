@@ -15,8 +15,6 @@ class StatementContainer extends React.Component {
           <Flex
             sx={{
               justifyContent: "space-between",
-              //   alignItems: 'center',
-              //   width: '100%'
             }}
           >
             <Text
@@ -26,13 +24,14 @@ class StatementContainer extends React.Component {
             >
               {this.props.author} wrote:
             </Text>
-            <Text>33 remaining</Text>
+            <Text sx={{ fontFamily: "Georgia", fontStyle: "italic", fontSize: [1] }}>33 remaining</Text>
           </Flex>
           <Text
             sx={{
               fontSize: [3, null, 3],
               lineHeight: "body",
               mb: [3, null, 3],
+              maxWidth: "85%",
             }}
           >
             {this.props.statement}
@@ -40,14 +39,9 @@ class StatementContainer extends React.Component {
           <Flex
             sx={{
               justifyContent: "space-around",
-              //   columnGap: '5px'
-              //   alignItems: 'center',
-              //   width: '100%'
+                // width: '100%'
             }}
           >
-            {/* <StatementButton>Agree</StatementButton>
-                    <StatementButton>Disagree</StatementButton>
-                    <StatementButton>Pass/Unsure</StatementButton> */}
             <AgreeButton />
             <DisagreeButton />
             <PassButton />
