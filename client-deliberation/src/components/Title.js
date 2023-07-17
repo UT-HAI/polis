@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading } from "theme-ui";
+import { Heading } from "theme-ui";
 
 class Title extends React.Component {
   render() {

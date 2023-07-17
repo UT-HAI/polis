@@ -4,7 +4,6 @@ import Subtitle from "./Subtitle";
 import StatementContainer from "./StatementContainer";
 import StatementForm from "./StatementForm";
 import { Box, Text } from "theme-ui";
-import Logo from "./hexLogo";
 import HexLogo from "./hexLogo";
 import OpinionContainer from "./OpinionContainer";
 

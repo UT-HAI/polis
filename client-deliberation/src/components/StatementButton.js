@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Button, Flex, Text } from "theme-ui";
+import { Button, Flex, Text } from "theme-ui";
 
 class StatementButton extends React.Component {
   render() {

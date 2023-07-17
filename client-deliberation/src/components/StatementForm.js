@@ -4,6 +4,8 @@ import React from "react";
 import { Flex, Box, Text, Button, jsx } from "theme-ui";
 
 class StatementForm extends React.Component {
+
+    //do we need this?
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +15,7 @@ class StatementForm extends React.Component {
   }
 
   handleChange = (event) => {
+    //TODO: get rid of most of these
     const inputValue = event.target.value;
     const characterCount = inputValue.length;
     const remainingCharacters = 140 - characterCount;

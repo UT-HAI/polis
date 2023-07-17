@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Flex, Box, Text } from "theme-ui";
-// import { Button } from 'theme-ui'
-import StatementButton from "./StatementButton";
 import AgreeButton from "./AgreeButton";
 import DisagreeButton from "./DisagreeButton";
 import PassButton from "./PassButton";
@@ -39,7 +37,6 @@ class StatementContainer extends React.Component {
           <Flex
             sx={{
               justifyContent: "space-around",
-                // width: '100%'
             }}
           >
             <AgreeButton />
