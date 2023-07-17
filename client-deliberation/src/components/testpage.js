@@ -31,7 +31,7 @@ class TestPage extends React.Component {
                         </li>
                     </ul>
                 </Text>
-                <Text sx={{ fontFamily: 'callout', fontStyle: 'italic' }}>Please remember, statements are displayed randomly and you are not replying directly to other participants' statements.</Text>
+                <Text sx={{ fontFamily: 'callout', fontStyle: 'italic', mb: [3] }}>Please remember, statements are displayed randomly and you are not replying directly to other participants' statements.</Text>
                 <StatementForm/>
             </Box>
         )
