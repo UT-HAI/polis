@@ -7,8 +7,8 @@ class Subtitle extends React.Component {
             <Heading
             as="h2"
             sx={{
-              fontSize: [3, null, 3],
-              fontWeight: 400,
+              fontSize: [3, null, 2],
+              fontWeight: 300,
               lineHeight: 'body',
               mb: [3, null, 4]
             }}>

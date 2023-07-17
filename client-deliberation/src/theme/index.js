@@ -5,10 +5,11 @@ export default {
       // 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
       // "'Space Mono', monospace",
       "'Helvetica Neue'",
+    callout: "'Times New Roman'",
     heading: 'inherit',
     monospace: "'Space Mono', monospace"
   },
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
+  fontSizes: [12, 14, 16, 18, 24, 36, 48, 64, 96],
   fontWeights: {
     body: 400,
     heading: 700,
