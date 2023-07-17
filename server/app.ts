@@ -42,6 +42,7 @@ helpersInitialized.then(
       denyIfNotFromWhitelistedDomain,
       devMode,
       enableAgid,
+      enableCORSDev,
       fetchThirdPartyCookieTestPt1,
       fetchThirdPartyCookieTestPt2,
       fetchIndexForAdminPage,
@@ -237,7 +238,11 @@ helpersInitialized.then(
     app.use(middleware_log_request_body);
     app.use(middleware_log_middleware_errors);
 
-    app.all("/api/v3/*", addCorsHeader);
+    if (devMode) {
+      app.all("/api/v3/*", enableCORSDev);
+    } else {
+      app.all("/api/v3/*", addCorsHeader);
+    }
     app.all("/font/*", addCorsHeader);
     app.all("/api/v3/*", middleware_check_if_options);
 

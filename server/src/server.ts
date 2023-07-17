@@ -1222,6 +1222,29 @@ function initializePolisHelpers() {
     return next();
   }
 
+  function enableCORSDev(
+    req: {
+      protocol: string;
+      get: (arg0: string) => any;
+      path: any;
+      headers: Headers;
+    },
+    res: { header: (arg0: string, arg1: string | boolean) => void },
+    next: (arg0?: string) => any
+  ) {
+    res.header("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With"
+    // );
+    // res.header(
+    //   "Access-Control-Allow-Methods",
+    //   "GET, PUT, POST, DELETE, OPTIONS"
+    // );
+    // res.header("Access-Control-Allow-Credentials", true);
+    return next();
+  }
+
   ////////////////////////////////////////////
   ////////////////////////////////////////////
   ////////////////////////////////////////////
@@ -13969,6 +13992,7 @@ Thanks for using Polis!
     devMode,
     emailTeam,
     enableAgid,
+    enableCORSDev,
     fail,
     fetchThirdPartyCookieTestPt1,
     fetchThirdPartyCookieTestPt2,
