@@ -19,11 +19,18 @@ class StatementForm extends React.Component {
     const remainingCharacters = 140 - characterCount;
     const hasExceededLimit = characterCount > 140;
     const exceededBy = characterCount - 140;
-    this.setState({ inputValue, characterCount, remainingCharacters, hasExceededLimit, exceededBy });
+    this.setState({
+      inputValue,
+      characterCount,
+      remainingCharacters,
+      hasExceededLimit,
+      exceededBy,
+    });
   };
 
   render() {
-    const { inputValue, characterCount, remainingCharacters, hasExceededLimit, exceededBy } = this.state;
+    const { inputValue, characterCount, remainingCharacters, hasExceededLimit, exceededBy } =
+      this.state;
 
     return (
       <Box>
@@ -52,11 +59,13 @@ class StatementForm extends React.Component {
           </Box>
           <Flex sx={{ alignItems: "center", justifyContent: "end" }}>
             {hasExceededLimit ? (
-              <Text sx={{ color: "red", mr: [3] }}>{`Statement length limit exceeded by ${exceededBy} ${exceededBy > 1 ? "characters" : "character"}`}</Text>
+              <Text
+                sx={{ color: "red", mr: [3] }}
+              >{`Statement length limit exceeded by ${exceededBy} ${
+                exceededBy > 1 ? "characters" : "character"
+              }`}</Text>
             ) : (
-              <Text sx={{ color: "gray", mr: [3] }}>
-                {remainingCharacters}
-              </Text>
+              <Text sx={{ color: "gray", mr: [3] }}>{remainingCharacters}</Text>
             )}
             <Button sx={{ padding: "8px 28px", my: [1] }} id="submitButton">
               {"Submit"}
