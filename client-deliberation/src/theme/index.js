@@ -88,7 +88,11 @@ export default {
       bg: 'primary',
       fontFamily: 'body',
       fontWeight: '500',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      transition: 'all .2s ease-in-out',
+      '&:hover': {
+        transform: 'scale(1.12,1.12)'
+      },
     }
   },
   cards: {
