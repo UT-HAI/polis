@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { Flex, Box, Text } from 'theme-ui'
 // import { Button } from 'theme-ui'
 import StatementButton from './StatementButton'
+import AgreeButton from './AgreeButton'
+import DisagreeButton from './DisagreeButton'
+import PassButton from './PassButton'
 
 class StatementContainer extends React.Component {
     render() {
@@ -30,9 +33,12 @@ class StatementContainer extends React.Component {
             //   alignItems: 'center',
             //   width: '100%'
             }}>
-                    <StatementButton>Agree</StatementButton>
+                    {/* <StatementButton>Agree</StatementButton>
                     <StatementButton>Disagree</StatementButton>
-                    <StatementButton>Pass/Unsure</StatementButton>
+                    <StatementButton>Pass/Unsure</StatementButton> */}
+                    <AgreeButton/>
+                    <DisagreeButton/>
+                    <PassButton/>
                 </Flex>
                 </Box>
             </Box>

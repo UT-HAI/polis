@@ -55,7 +55,7 @@ class StatementForm extends React.Component {
               <Text sx={{ color: "red", mr: [3] }}>{`Statement length limit exceeded by ${exceededBy} ${exceededBy > 1 ? "characters" : "character"}`}</Text>
             ) : (
               <Text sx={{ color: "gray", mr: [3] }}>
-                {remainingCharacters} characters remaining
+                {remainingCharacters}
               </Text>
             )}
             <Button sx={{ padding: "8px 28px", my: [1] }} id="submitButton">
