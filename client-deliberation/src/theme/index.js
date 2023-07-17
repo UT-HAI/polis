@@ -3,7 +3,8 @@ export default {
   fonts: {
     body:
       // 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-      "'Space Mono', monospace",
+      // "'Space Mono', monospace",
+      "'Helvetica Neue'",
     heading: 'inherit',
     monospace: "'Space Mono', monospace"
   },
@@ -24,7 +25,7 @@ export default {
   },
   colors: {
     // text: "#FFF",
-    text: '#60656F',
+    text: '#000000',
     // background: "#03a9f4",
     // primary: "#FFF",
     background: '#FFF',
