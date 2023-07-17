@@ -2,6 +2,7 @@ import React from 'react'
 import Title from './Title'
 import Subtitle from './Subtitle'
 import StatementContainer from './StatementContainer'
+import StatementForm from './StatementForm'
 import { Box, Text } from 'theme-ui'
 import Logo from "./hexLogo"
 import HexLogo from './hexLogo'
@@ -31,6 +32,7 @@ class TestPage extends React.Component {
                     </ul>
                 </Text>
                 <Text sx={{ fontFamily: 'callout', fontStyle: 'italic' }}>Please remember, statements are displayed randomly and you are not replying directly to other participants' statements.</Text>
+                <StatementForm/>
             </Box>
         )
     }

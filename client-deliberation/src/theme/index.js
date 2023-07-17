@@ -30,7 +30,7 @@ export default {
     // background: "#03a9f4",
     // primary: "#FFF",
     background: '#FFF',
-    primary: '#03a9f4',
+    primary: '#0090ff',
     secondary: '#F6F7F8',
     mediumGray: '#60656F'
   },
@@ -87,6 +87,7 @@ export default {
       color: 'background',
       bg: 'primary',
       fontFamily: 'body',
+      fontWeight: '500',
       cursor: 'pointer'
     }
   },
