@@ -27,7 +27,7 @@ class StatementForm extends React.Component {
 
     return (
       <Box>
-        <form sx={{ mb: [4] }}>
+        <form sx={{ mb: [2] }}>
           <Box sx={{ mt: [2] }}>
             <textarea
               sx={{

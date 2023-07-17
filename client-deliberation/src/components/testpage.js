@@ -6,6 +6,7 @@ import StatementForm from './StatementForm'
 import { Box, Text } from 'theme-ui'
 import Logo from "./hexLogo"
 import HexLogo from './hexLogo'
+import OpinionContainer from './OpinionContainer'
 
 class TestPage extends React.Component {
     render() {
@@ -33,6 +34,7 @@ class TestPage extends React.Component {
                 </Text>
                 <Text sx={{ fontFamily: 'callout', fontStyle: 'italic', mb: [3] }}>Please remember, statements are displayed randomly and you are not replying directly to other participants' statements.</Text>
                 <StatementForm/>
+                <OpinionContainer/>
             </Box>
         )
     }
