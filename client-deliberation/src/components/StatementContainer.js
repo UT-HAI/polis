@@ -8,7 +8,7 @@ import anon_profile from "./anon_profile";
 
 const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, statement }) => {
   return (
-    <Box sx={{ border: "solid 1px #d3d3d3", borderRadius: "5px", marginBottom: "10px" }}>
+    <Box sx={{ border: "solid 1px #d3d3d3", borderRadius: "5px", bg: "white" }}>
       <Box sx={{ margin: "10px" }}>
         <Flex
           sx={{
