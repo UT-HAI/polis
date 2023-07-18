@@ -20,41 +20,43 @@ const TestPage = () => {
       <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [2] }}>
         Welcome to a new kind of conversation - vote on other people's statements.
       </Text>
-      <StatementContainer
-        author="Anonymous"
-        numStatementsRemaining={33}
-        statement={
-          'We could get one of those digital frames that can rotate through "posters" of our active projects (visual summaries) and somehow hang it'
-        }
-      />
-      <Box
-        sx={{
-          border: "solid 1px #d3d3d3",
-          borderRadius: "5px",
-          bg: "white",
-          marginBottom: "10px",
-          minHeight: "30px",
-          margin: "0 auto",
-          width: "99%",
-          position: "relative",
-          top: "-26px",
-          zIndex: "-2"
-        }}
-      />
-      <Box
-        sx={{
-          border: "solid 1px #d3d3d3",
-          borderRadius: "5px",
-          bg: "white",
-          marginBottom: "10px",
-          minHeight: "30px",
-          margin: "0 auto",
-          width: "98%",
-          position: "relative",
-          top: "-52px",
-          zIndex: "-4"
-        }}
-      />
+      <Box sx={{ mb: "-40px" }}>
+        <StatementContainer
+          author="Anonymous"
+          numStatementsRemaining={33}
+          statement={
+            'We could get one of those digital frames that can rotate through "posters" of our active projects (visual summaries) and somehow hang it'
+          }
+        />
+        <Box
+          sx={{
+            border: "solid 1px #d3d3d3",
+            borderRadius: "5px",
+            bg: "white",
+            marginBottom: "10px",
+            minHeight: "30px",
+            margin: "0 auto",
+            width: "99%",
+            position: "relative",
+            top: "-26px",
+            zIndex: "-1",
+          }}
+        />
+        <Box
+          sx={{
+            border: "solid 1px #d3d3d3",
+            borderRadius: "5px",
+            bg: "white",
+            marginBottom: "10px",
+            minHeight: "30px",
+            margin: "0 auto",
+            width: "98%",
+            position: "relative",
+            top: "-52px",
+            zIndex: "-2",
+          }}
+        />
+      </Box>
       <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [3] }}>
         Are your perspectives or experiences missing from the conversation? If so, add them in the
         box below.
