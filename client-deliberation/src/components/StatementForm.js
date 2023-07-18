@@ -32,7 +32,7 @@ const StatementForm = ({ myAvatar }) => {
             id="createStatement"
             placeholder="Share your perspective..."
             type="text"
-            onChange={() => setCharCount(event.target.value.length)}
+            onChange={(event) => setCharCount(event.target.value.length)}
             maxLength={400}
           />
           <Flex sx={{ alignItems: "center", justifyContent: "end" }}>
