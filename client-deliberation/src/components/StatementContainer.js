@@ -12,18 +12,20 @@ class StatementContainer extends React.Component {
       <Box sx={{ border: "solid 1px #d3d3d3", borderRadius: "5px", marginBottom: "10px" }}>
         <Box sx={{ margin: "10px" }}>
           <Flex
-            sx={
-              {
-                // justifyContent: "space-between",
-                columnGap: '10px'
-              }
-            }
+            sx={{
+              columnGap: "10px",
+            }}
           >
-            <Box sx={{flex: '0 0 auto'}}>
-              <img style={{border: 'solid 1px #d3d3d3', borderRadius: "2px"}} width="35" height="35" src={anon_profile}></img>
+            <Box sx={{ flex: "0 0 auto" }}>
+              <img
+                style={{ border: "solid 1px #d3d3d3", borderRadius: "2px" }}
+                width="35"
+                height="35"
+                src={anon_profile}
+              ></img>
             </Box>
-            <Flex sx={{ flex: '0 0 75%', flexDirection: "column" }}>
-              <Box>
+            <Flex sx={{ flexDirection: "column" }}>
+              <Flex sx={{ justifyContent: "space-between" }}>
                 <Text
                   sx={{
                     fontWeight: "300",
@@ -31,25 +33,22 @@ class StatementContainer extends React.Component {
                 >
                   {this.props.author} wrote:
                 </Text>
-              </Box>
-              <Box>
+                <Text sx={{ fontFamily: "Georgia", fontStyle: "italic", fontSize: [0] }}>
+                  33 remaining
+                </Text>
+              </Flex>
+              <Box sx={{ maxWidth: "85%" }}>
                 <Text
                   sx={{
                     fontSize: [3, null, 3],
                     lineHeight: "body",
                     mb: [3, null, 3],
-                    // maxWidth: "85%",
                   }}
                 >
                   {this.props.statement}
                 </Text>
               </Box>
             </Flex>
-            <Box sx={{ ml: 'auto'}}>
-              <Text sx={{ fontFamily: "Georgia", fontStyle: "italic", fontSize: [1] }}>
-                33 remaining
-              </Text>
-            </Box>
           </Flex>
 
           <Flex
