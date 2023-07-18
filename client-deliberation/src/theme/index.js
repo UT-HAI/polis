@@ -5,7 +5,6 @@ export default {
       // 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
       // "'Space Mono', monospace",
       "'Helvetica Neue'",
-    callout: "'Times New Roman'",
     heading: 'inherit',
     monospace: "'Space Mono', monospace"
   },
@@ -17,7 +16,7 @@ export default {
   },
   text: {
     conversationPage: {
-      fontFamily: "callout",
+      fontFamily: "Times New Roman",
       fontStyle: "italic",
     }
   },
