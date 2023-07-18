@@ -6,7 +6,7 @@ const Title = ({ value }) => {
     <Heading
       as="h1"
       sx={{
-        fontSize: [3, null, 5],
+        fontSize: [4, null, 5],
         lineHeight: "body",
         mb: [3, null, 2],
       }}

@@ -7,7 +7,7 @@ const OpinionContainer = () => {
       <Heading
         as="h3"
         sx={{
-          fontSize: [3, null, 3],
+          fontSize: [3],
           fontWeight: 400,
           lineHeight: "body",
           mb: [3, null, 2],

@@ -6,7 +6,7 @@ const Subtitle = ({ value }) => {
     <Heading
       as="h2"
       sx={{
-        fontSize: [3, null, 2],
+        fontSize: [2],
         fontWeight: 300,
         lineHeight: "body",
         mb: [3, null, 4],

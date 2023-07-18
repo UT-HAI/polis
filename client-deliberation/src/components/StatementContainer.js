@@ -27,6 +27,7 @@ const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, stat
             <Flex sx={{ justifyContent: "space-between" }}>
               <Text
                 sx={{
+                  fontSize: [1, null, 2],
                   fontWeight: "300",
                 }}
               >
@@ -39,9 +40,9 @@ const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, stat
             <Box sx={{ maxWidth: "85%" }}>
               <Text
                 sx={{
-                  fontSize: [3, null, 3],
+                  fontSize: [2, null, 3],
                   lineHeight: "body",
-                  mb: [3, null, 3],
+                  mb: [4, null, 3],
                 }}
               >
                 {statement}
