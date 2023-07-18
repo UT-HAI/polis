@@ -6,7 +6,7 @@ import DisagreeButton from "./DisagreeButton";
 import PassButton from "./PassButton";
 import anon_profile from "./anon_profile";
 
-const StatementContainer = ({ author, numStatementsRemaining, statement }) => {
+const StatementContainer = ({ author, authorPicture, numStatementsRemaining, statement }) => {
   return (
     <Box sx={{ border: "solid 1px #d3d3d3", borderRadius: "5px", marginBottom: "10px" }}>
       <Box sx={{ margin: "10px" }}>
@@ -20,7 +20,7 @@ const StatementContainer = ({ author, numStatementsRemaining, statement }) => {
               style={{ border: "solid 1px #d3d3d3", borderRadius: "2px" }}
               width="35"
               height="35"
-              src={anon_profile}
+              src={authorPicture || anon_profile}
             />
           </Box>
           <Flex sx={{ flexDirection: "column" }}>
