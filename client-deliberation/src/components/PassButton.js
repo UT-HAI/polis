@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text } from "theme-ui";
+import { Button } from "theme-ui";
 
 class PassButton extends React.Component {
   render() {

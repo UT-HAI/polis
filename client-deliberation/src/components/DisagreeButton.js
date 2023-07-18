@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Flex, Text } from "theme-ui";
+import { Button, Flex } from "theme-ui";
 
 class DisagreeButton extends React.Component {
   render() {
