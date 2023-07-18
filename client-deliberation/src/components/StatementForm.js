@@ -27,7 +27,6 @@ const StatementForm = ({ myAvatar }) => {
               width: "100%",
               padding: [2],
               resize: "none",
-              minHeight: "37px",
             }}
             id="createStatement"
             placeholder="Share your perspective..."

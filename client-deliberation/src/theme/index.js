@@ -22,11 +22,11 @@ export default {
   },
   borders: {
     primary: {
-      border: "solid 1px #d3d3d3",
+      border: "solid 1px lightGray",
       borderRadius: "5px"
     },
     avatar: {
-      border: "solid 1px #d3d3d3",
+      border: "solid 1px lightGray",
       borderRadius: "2px"
     }
   },
