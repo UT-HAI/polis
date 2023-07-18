@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Flex, Box, Text, Button, jsx } from "theme-ui";
 import anon_profile from "./anon_profile";
 
-const StatementForm = ({ myPicture }) => {
+const StatementForm = ({ myAvatar }) => {
   const [charCount, setCharCount] = useState(0);
 
   return (
@@ -13,7 +13,7 @@ const StatementForm = ({ myPicture }) => {
         style={{ border: "solid 1px #d3d3d3", borderRadius: "2px" }}
         width="35"
         height="35"
-        src={myPicture || anon_profile}
+        src={myAvatar || anon_profile}
       />
       <Box sx={{ flex: "0 1 100%" }}>
         <form sx={{ mb: [2] }}>
