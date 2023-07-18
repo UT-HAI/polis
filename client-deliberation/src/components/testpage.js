@@ -77,9 +77,9 @@ const TestPage = () => {
       <Box sx={{ mb: [5] }}>
         <OpinionContainer />
       </Box>
-      <Flex sx={{justifyContent: 'center'}}>
+      <Flex sx={{ justifyContent: "center" }}>
         {/* TODO: enlarge */}
-        <HexLogo /> 
+        <HexLogo />
       </Flex>
     </Box>
   );
