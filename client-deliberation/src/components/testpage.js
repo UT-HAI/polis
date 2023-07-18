@@ -3,7 +3,7 @@ import Title from "./Title";
 import Subtitle from "./Subtitle";
 import StatementContainer from "./StatementContainer";
 import StatementForm from "./StatementForm";
-import { Box, Text } from "theme-ui";
+import { Flex, Box, Text } from "theme-ui";
 import HexLogo from "./hexLogo";
 import OpinionContainer from "./OpinionContainer";
 
@@ -74,7 +74,13 @@ const TestPage = () => {
         other participants' statements.
       </Text>
       <StatementForm />
-      <OpinionContainer />
+      <Box sx={{ mb: [5] }}>
+        <OpinionContainer />
+      </Box>
+      <Flex sx={{justifyContent: 'center'}}>
+        {/* TODO: enlarge */}
+        <HexLogo /> 
+      </Flex>
     </Box>
   );
 };
