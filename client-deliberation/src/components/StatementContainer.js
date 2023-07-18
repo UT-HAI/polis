@@ -22,7 +22,7 @@ class StatementContainer extends React.Component {
                 width="35"
                 height="35"
                 src={anon_profile}
-              ></img>
+              />
             </Box>
             <Flex sx={{ flexDirection: "column" }}>
               <Flex sx={{ justifyContent: "space-between" }}>

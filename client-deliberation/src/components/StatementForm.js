@@ -2,10 +2,10 @@
 
 import React from "react";
 import { Flex, Box, Text, Button, jsx } from "theme-ui";
+import anon_profile from "./anon_profile";
 
 class StatementForm extends React.Component {
-
-    //do we need this?
+  //do we need this?
   constructor(props) {
     super(props);
     this.state = {
@@ -35,9 +35,15 @@ class StatementForm extends React.Component {
       this.state;
 
     return (
-      <Box>
-        <form sx={{ mb: [2] }}>
-          <Box sx={{ mt: [2] }}>
+      <Flex sx={{ columnGap: "10px" }}>
+        <img
+          style={{ border: "solid 1px #d3d3d3", borderRadius: "2px" }}
+          width="35"
+          height="35"
+          src={anon_profile}
+        />
+        <Box sx={{ flex: "0 1 100%" }}>
+          <form sx={{ mb: [2] }}>
             <textarea
               sx={{
                 fontFamily: "body",
@@ -59,23 +65,23 @@ class StatementForm extends React.Component {
               onChange={this.handleChange}
               maxLength={400}
             />
-          </Box>
-          <Flex sx={{ alignItems: "center", justifyContent: "end" }}>
-            {hasExceededLimit ? (
-              <Text
-                sx={{ color: "red", mr: [3] }}
-              >{`Statement length limit exceeded by ${exceededBy} ${
-                exceededBy > 1 ? "characters" : "character"
-              }`}</Text>
-            ) : (
-              <Text sx={{ color: "gray", mr: [3] }}>{remainingCharacters}</Text>
-            )}
-            <Button sx={{ padding: "8px 28px", my: [1] }} id="submitButton">
-              {"Submit"}
-            </Button>
-          </Flex>
-        </form>
-      </Box>
+            <Flex sx={{ alignItems: "center", justifyContent: "end" }}>
+              {hasExceededLimit ? (
+                <Text
+                  sx={{ color: "red", mr: [3] }}
+                >{`Statement length limit exceeded by ${exceededBy} ${
+                  exceededBy > 1 ? "characters" : "character"
+                }`}</Text>
+              ) : (
+                <Text sx={{ color: "gray", mr: [3] }}>{remainingCharacters}</Text>
+              )}
+              <Button sx={{ padding: "8px 28px", my: [1] }} id="submitButton">
+                {"Submit"}
+              </Button>
+            </Flex>
+          </form>
+        </Box>
+      </Flex>
     );
   }
 }
