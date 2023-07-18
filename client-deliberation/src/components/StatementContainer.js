@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Flex, Box, Text } from "theme-ui";
+import { Flex, Box, Text, Image } from "theme-ui";
 import AgreeButton from "./AgreeButton";
 import DisagreeButton from "./DisagreeButton";
 import PassButton from "./PassButton";
@@ -8,7 +8,7 @@ import anon_profile from "./anon_profile";
 
 const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, statement }) => {
   return (
-    <Box sx={{ border: "solid 1px #d3d3d3", borderRadius: "5px", bg: "white" }}>
+    <Box sx={{ variant: "statementBox" }}>
       <Box sx={{ margin: "10px" }}>
         <Flex
           sx={{
@@ -16,8 +16,8 @@ const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, stat
           }}
         >
           <Box sx={{ flex: "0 0 auto" }}>
-            <img
-              style={{ border: "solid 1px #d3d3d3", borderRadius: "2px" }}
+            <Image
+              sx={{ variant: "borders.avatar" }}
               width="35"
               height="35"
               src={authorAvatar || anon_profile}

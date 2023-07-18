@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React, { useState } from "react";
-import { Flex, Box, Text, Button, jsx } from "theme-ui";
+import { Flex, Box, Text, Button, Image, jsx } from "theme-ui";
 import anon_profile from "./anon_profile";
 
 const StatementForm = ({ myAvatar }) => {
@@ -9,23 +9,23 @@ const StatementForm = ({ myAvatar }) => {
 
   return (
     <Flex sx={{ columnGap: "10px" }}>
-      <img
-        style={{ border: "solid 1px #d3d3d3", borderRadius: "2px" }}
-        width="35"
-        height="35"
-        src={myAvatar || anon_profile}
-      />
+      <Box sx={{ flex: "0 0 auto" }}>
+        <Image
+          sx={{ variant: "borders.avatar" }}
+          width="35"
+          height="35"
+          src={myAvatar || anon_profile}
+        />
+      </Box>
       <Box sx={{ flex: "0 1 100%" }}>
         <form sx={{ mb: [2] }}>
           <textarea
             sx={{
+              variant: "borders.primary",
               fontFamily: "body",
               fontSize: [2],
               width: "100%",
-              borderRadius: 4,
               padding: [2],
-              border: "1px solid",
-              borderColor: "#cccccc",
               overflow: "hidden",
               overflowWrap: "break-word",
               resize: "none",

@@ -30,7 +30,7 @@ const TestPage = () => {
         />
         <Box
           sx={{
-            variant: "box.stack",
+            variant: "statementBox.stack",
             width: "99%",
             top: "-26px",
             zIndex: "-1",
@@ -38,7 +38,7 @@ const TestPage = () => {
         />
         <Box
           sx={{
-            variant: "box.stack",
+            variant: "statementBox.stack",
             width: "98%",
             top: "-52px",
             zIndex: "-2",

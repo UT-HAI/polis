@@ -20,10 +20,21 @@ export default {
       fontStyle: "italic",
     },
   },
-  box: {
-    stack: {
+  borders: {
+    primary: {
       border: "solid 1px #d3d3d3",
-      borderRadius: "5px",
+      borderRadius: "5px"
+    },
+    avatar: {
+      border: "solid 1px #d3d3d3",
+      borderRadius: "2px"
+    }
+  },
+  statementBox: {
+    variant: "borders.primary",
+    bg: "white",
+    stack: {
+      variant: "borders.primary",
       bg: "white",
       marginBottom: "10px",
       minHeight: "30px",
