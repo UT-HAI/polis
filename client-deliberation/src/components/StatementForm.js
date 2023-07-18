@@ -26,8 +26,6 @@ const StatementForm = ({ myAvatar }) => {
               fontSize: [2],
               width: "100%",
               padding: [2],
-              overflow: "hidden",
-              overflowWrap: "break-word",
               resize: "none",
               minHeight: "37px",
             }}
