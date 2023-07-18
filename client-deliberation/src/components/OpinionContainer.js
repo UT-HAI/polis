@@ -15,16 +15,16 @@ const OpinionContainer = () => {
       >
         Opinion Groups
       </Heading>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [2] }}>
+      <Text variant="conversationPage" sx={{ mb: [2] }}>
         People who vote similarly <b>are grouped.</b> Click a group to see which viewpoints they
         share.
       </Text>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [2] }}>
+      <Text variant="conversationPage" sx={{ mb: [2] }}>
         You've probably seen 'recommended products' on Amazon, or 'recommended movies' on Netflix.
         Each of those services uses statistics to group the user with people who buy and watch
         similar things, then show them things that those people bought or watched.
       </Text>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic" }}>
+      <Text variant="conversationPage">
         When a user votes on statements, they are grouped with people who voted like they did! You
         can see those groups below. Each is made up of people who have similar opinions. There are
         fascinating insights to discover in each conversation. Go ahead - click a group to see what

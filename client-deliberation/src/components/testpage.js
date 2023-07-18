@@ -17,7 +17,7 @@ const TestPage = () => {
           "Pilot testing the Pol.is deliberation platform to see what features we should augment."
         }
       />
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [2] }}>
+      <Text variant="conversationPage" sx={{ mb: [2] }}>
         Welcome to a new kind of conversation - vote on other people's statements.
       </Text>
       <Box sx={{ mb: "-40px" }}>
@@ -57,19 +57,19 @@ const TestPage = () => {
           }}
         />
       </Box>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [3] }}>
+      <Text variant="conversationPage" sx={{ mb: [3] }}>
         Are your perspectives or experiences missing from the conversation? If so, add them in the
         box below.
       </Text>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic" }}>What makes a good statement?</Text>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic" }}>
+      <Text variant="conversationPage">What makes a good statement?</Text>
+      <Text variant="conversationPage">
         <ul>
           <li>Stand alone idea</li>
           <li>Raise new perspectives, experiences or issues</li>
           <li>Clear & concise (limited to 140 characters)</li>
         </ul>
       </Text>
-      <Text sx={{ fontFamily: "callout", fontStyle: "italic", mb: [3] }}>
+      <Text variant="conversationPage" sx={{ mb: [3] }}>
         Please remember, statements are displayed randomly and you are not replying directly to
         other participants' statements.
       </Text>

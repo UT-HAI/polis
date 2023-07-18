@@ -15,6 +15,12 @@ export default {
     heading: 700,
     bold: 700
   },
+  text: {
+    conversationPage: {
+      fontFamily: "callout",
+      fontStyle: "italic",
+    }
+  },
   sizes: {
     maxWidth: {
       paragraph: '35em' // right syntax? https://theme-ui.com/theme-spec
