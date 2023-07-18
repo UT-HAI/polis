@@ -30,28 +30,16 @@ const TestPage = () => {
         />
         <Box
           sx={{
-            border: "solid 1px #d3d3d3",
-            borderRadius: "5px",
-            bg: "white",
-            marginBottom: "10px",
-            minHeight: "30px",
-            margin: "0 auto",
+            variant: "box.stack",
             width: "99%",
-            position: "relative",
             top: "-26px",
             zIndex: "-1",
           }}
         />
         <Box
           sx={{
-            border: "solid 1px #d3d3d3",
-            borderRadius: "5px",
-            bg: "white",
-            marginBottom: "10px",
-            minHeight: "30px",
-            margin: "0 auto",
+            variant: "box.stack",
             width: "98%",
-            position: "relative",
             top: "-52px",
             zIndex: "-2",
           }}

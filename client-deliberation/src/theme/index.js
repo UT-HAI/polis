@@ -18,7 +18,18 @@ export default {
     conversationPage: {
       fontFamily: "Times New Roman",
       fontStyle: "italic",
-    }
+    },
+  },
+  box: {
+    stack: {
+      border: "solid 1px #d3d3d3",
+      borderRadius: "5px",
+      bg: "white",
+      marginBottom: "10px",
+      minHeight: "30px",
+      margin: "0 auto",
+      position: "relative",
+    },
   },
   sizes: {
     maxWidth: {
