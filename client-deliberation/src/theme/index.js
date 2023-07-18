@@ -89,6 +89,13 @@ export default {
       fontFamily: 'body',
       fontWeight: '500',
       cursor: 'pointer',
+    },
+    vote: {
+      color: 'text',
+      bg: 'transparent',
+      fontWeight: '400',
+      fontSize: [1],
+      cursor: 'pointer',
       transition: 'all .2s ease-in-out',
       '&:hover': {
         transform: 'scale(1.12,1.12)'
