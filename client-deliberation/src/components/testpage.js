@@ -62,8 +62,6 @@ const TestPage = () => {
               numStatementsRemaining={nextComment.remaining}
               statement={nextComment.txt}
               vote={vote}
-              commentId={nextComment.tid}
-              weight={0}
             />
           ) : (
             <Text>

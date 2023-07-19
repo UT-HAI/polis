@@ -56,8 +56,8 @@ const StatementUI = ({ author, authorAvatar, numStatementsRemaining, statement, 
         }}
       >
         <AgreeButton vote={vote} />
-        <DisagreeButton />
-        <PassButton />
+        <DisagreeButton vote={vote} />
+        <PassButton vote={vote}/>
       </Flex>
     </React.Fragment>
   );

@@ -3,17 +3,20 @@ import { Button, Flex } from "theme-ui";
 
 const AgreeButton = ({ vote }) => {
   return (
-    <Button variant="vote" onClick={() => {
-      //from client-participation/js/stores/polis.js:418
-      // clearComment(commentId);
-      var o = {
-        vote: -1, //agree
-      };
-      // if (!_.isUndefined(starred)) {
-      //   o.starred = starred;
-      // }
-      return vote(o);
-    }}>
+    <Button
+      variant="vote"
+      onClick={() => {
+        //from client-participation/js/stores/polis.js:418
+        // clearComment(commentId);
+        var o = {
+          vote: -1, //agree
+        };
+        // if (!_.isUndefined(starred)) {
+        //   o.starred = starred;
+        // }
+        return vote(o);
+      }}
+    >
       <Flex sx={{ alignItems: "center", columnGap: [2] }}>
         <svg
           fill="#2ecc71"
