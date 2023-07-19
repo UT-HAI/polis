@@ -1067,7 +1067,7 @@ const fetchMath = (conversation_id, math_tick) => {
   //     '&conversation_id=' +
   //     conversation_id
   // )
-  PolisNet.polisGet('/api/v3/math', {
+  return PolisNet.polisGet('/api/v3/math', {
     math_tick: math_tick,
     conversation_id: conversation_id,
   })
@@ -1115,7 +1115,7 @@ const fetchUnmoderatedComments = (conversation_id) => {
   //     'mod=0&conversation_id=' +
   //     conversation_id
   // )
-  PolisNet.polisGet('/api/v3/comments', {
+  return PolisNet.polisGet('/api/v3/comments', {
     moderation: true,
     include_voting_patterns: false,
     mod: 0,
@@ -1164,7 +1164,7 @@ const fetchAcceptedComments = (conversation_id) => {
   //     'conversation_id=' +
   //     conversation_id
   // )
-  PolisNet.polisGet('/api/v3/comments', {
+  return PolisNet.polisGet('/api/v3/comments', {
     moderation: true,
     include_voting_patterns: false,
     mod: 1,
@@ -1213,7 +1213,7 @@ const fetchRejectedComments = (conversation_id) => {
   //     'mod=-1&conversation_id=' +
   //     conversation_id
   // )
-  PolisNet.polisGet('/api/v3/comments', {
+  return PolisNet.polisGet('/api/v3/comments', {
     moderation: true,
     include_voting_patterns: false,
     mod: -1,
