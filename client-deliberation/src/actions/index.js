@@ -1051,7 +1051,7 @@ const mathFetchError = (err) => {
 }
 
 const fetchMath = (conversation_id, math_tick) => {
-  return PolisNet.polisGet('/api/v3/math', {
+  return PolisNet.polisGet('/api/v3/math/pca2', {
     math_tick: math_tick,
     conversation_id: conversation_id,
   })
