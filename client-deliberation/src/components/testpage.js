@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Title from "./Title";
 import Subtitle from "./Subtitle";
 import StatementContainer from "./StatementContainer";
@@ -6,8 +6,38 @@ import StatementForm from "./StatementForm";
 import { Flex, Box, Text } from "theme-ui";
 import HexLogo from "./hexLogo";
 import OpinionContainer from "./OpinionContainer";
+import PolisNet from '../util/net';
 
 const TestPage = () => {
+  const [nextComment, setNextComment] = useState("")
+  const conversation_id = "7ajfd9j53y"
+
+  //state to maintain:
+  //  internal array of comments to vote on, indexed by the tid
+
+  const vote = (params) => {
+    PolisNet.polisPost('/api/v3/votes', $.extend({}, params, {
+      pid: "mypid",
+      conversation_id: conversation_id,
+      agid: 1,
+      tid: nextComment.tid,
+      weight: 0,
+    })).then((res) => {
+      setNextComment(res.nextComment)
+    })
+  }
+
+  useEffect(() => {
+    PolisNet.polisGet('/api/v3/participationInit', {
+      conversation_id: conversation_id,
+      pid: "mypid",
+      lang: "acceptLang"
+    }).then((res) => {
+      console.log(res)
+      setNextComment(res.nextComment)
+    })
+  }, [])
+
   return (
     <Box sx={{ maxWidth: "768px", margin: "auto", py: "20px", px: "10px" }}>
       <HexLogo />
@@ -21,13 +51,26 @@ const TestPage = () => {
         Welcome to a new kind of conversation - vote on other people's statements.
       </Text>
       <Box sx={{ mb: "-40px" }}>
+        {typeof nextComment.tid !== 'undefined' ? (
         <StatementContainer
+          author="Anonymous"
+          numStatementsRemaining={nextComment.remaining}
+          statement={nextComment.txt}
+          vote={vote}
+          commentId={nextComment.tid}
+          weight={0}
+        />) : (
+          <StatementContainer
+            statement={"You've voted on all the statements!"}
+          />)
+        }
+        {/* <StatementContainer
           author="Anonymous"
           numStatementsRemaining={33}
           statement={
             'We could get one of those digital frames that can rotate through "posters" of our active projects (visual summaries) and somehow hang it'
           }
-        />
+        /> */}
         <Box
           sx={{
             variant: "statementBox.stack",

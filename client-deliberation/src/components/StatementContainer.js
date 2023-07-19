@@ -6,7 +6,7 @@ import DisagreeButton from "./DisagreeButton";
 import PassButton from "./PassButton";
 import anon_profile from "./anon_profile";
 
-const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, statement }) => {
+const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, statement, vote }) => {
   return (
     <Box sx={{ variant: "statementBox" }}>
       <Box sx={{ margin: "10px" }}>
@@ -56,7 +56,7 @@ const StatementContainer = ({ author, authorAvatar, numStatementsRemaining, stat
             justifyContent: "space-around",
           }}
         >
-          <AgreeButton />
+          <AgreeButton vote={vote}/>
           <DisagreeButton />
           <PassButton />
         </Flex>
