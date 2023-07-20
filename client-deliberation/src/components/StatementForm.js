@@ -59,16 +59,21 @@ const StatementForm = ({ myAvatar, conversation_id }) => {
 
   const Message = () => {
     return (
-      <Box
+      <Flex
         sx={{
-          flex: "0 1 auto",
-          bg: `${showMessage.status === "success" ? "#32a852" : "#cf152a"}`,
-          borderRadius: "5px",
-          padding: "5px",
+          justifyContent: "flex-end",
         }}
       >
-        <Text sx={{ color: "white" }}>{messageValue}</Text>
-      </Box>
+        <Box
+          sx={{
+            bg: `${showMessage.status === "success" ? "#32a852" : "#cf152a"}`,
+            borderRadius: "5px",
+            padding: "5px",
+          }}
+        >
+          <Text sx={{ color: "white" }}>{messageValue}</Text>
+        </Box>
+      </Flex>
     );
   };
 
