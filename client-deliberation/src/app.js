@@ -68,13 +68,15 @@ const isMatch = (conv_id) => {
       conversation_id: conv_id,
       pid: "mypid",
       lang: "acceptLang",
-    }).then((res) => {
-      resolve(true);
-    }).fail((err) => {
-      resolve(false);
-    });
+    })
+      .then((res) => {
+        resolve(true);
+      })
+      .fail((err) => {
+        resolve(false);
+      });
   });
-}
+};
 
 const RouteOrRedirect = (props) => {
   const [isConversationExists, setIsConversationExists] = useState(null);
@@ -86,7 +88,7 @@ const RouteOrRedirect = (props) => {
   }, [props.computedMatch.params.conversation_id]);
 
   if (isConversationExists === null) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
