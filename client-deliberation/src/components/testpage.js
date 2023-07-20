@@ -9,12 +9,9 @@ import HexLogo from "./hexLogo";
 import OpinionContainer from "./OpinionContainer";
 import PolisNet from "../util/net";
 
-const TestPage = () => {
+const TestPage = (props) => {
   const [nextComment, setNextComment] = useState("");
-  const conversation_id = "7ajfd9j53y";
-
-  //state to maintain:
-  //  internal array of comments to vote on, indexed by the tid
+  const conversation_id = props.match.params.conversation_id;
 
   const vote = (params) => {
     PolisNet.polisPost(
@@ -26,9 +23,19 @@ const TestPage = () => {
         tid: nextComment.tid,
         weight: 0,
       }),
-    ).then((res) => {
-      setNextComment(res.nextComment);
-    });
+    )
+      .then((res) => {
+        setNextComment(res.nextComment);
+      })
+      .fail((err) => {
+        if (!navigator.cookieEnabled) {
+          alert(
+            "Sorry, voting requires cookies to be enabled. If you do enable cookies, be sure to reload the page after.",
+          );
+        } else {
+          alert("Apologies, your vote failed to send. Please check your connection and try again.");
+        }
+      });
   };
 
   useEffect(() => {
