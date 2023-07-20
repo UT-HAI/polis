@@ -55,21 +55,28 @@ const PrivateRoute = ({ component: Component, isLoading, authed, ...rest }) => {
   )
 }
 
-const RouteOrRedirect = async (props) => {
-  const isMatching = await isMatch(props.computedMatch.params.conversation_id);
-  return (
-    <div>
-      {isMatching ? (
-        <Route path={props.path} component={props.component} />
-      ) : (
-        <Redirect to="/404"/>
-      )}
-    </div>
-  )
+PrivateRoute.propTypes = {
+  component: PropTypes.element,
+  isLoading: PropTypes.bool,
+  location: PropTypes.object,
+  authed: PropTypes.bool
 }
 
+const isMatch = (conv_id) => {
+  return new Promise((resolve, reject) => {
+    PolisNet.polisGet("/api/v3/participationInit", {
+      conversation_id: conv_id,
+      pid: "mypid",
+      lang: "acceptLang",
+    }).then((res) => {
+      resolve(true);
+    }).fail((err) => {
+      resolve(false);
+    });
+  });
+}
 
-const RouteOrRedirect2 = (props) => {
+const RouteOrRedirect = (props) => {
   const [isConversationExists, setIsConversationExists] = useState(null);
 
   useEffect(() => {
@@ -87,52 +94,12 @@ const RouteOrRedirect2 = (props) => {
       {isConversationExists ? (
         <Route path={props.path} component={props.component} />
       ) : (
-        <Redirect to="/404" />
+        // <Redirect to="/404" />
+        <DoesNotExist title={"This conversation does not exist."} />
       )}
     </div>
   );
 };
-
-const RouteOrNotFound = (props) => {
-  alert(`/:${props.match.params.conversation_id}`)
-  return (
-    <div>
-      {isMatch(props.match.params.conversation_id) ? (
-        // <Route path={`/:${props.match.params.conversation_id}`} component={TestPage} />
-        // <Route path={`/:conversation_id`} component={TestPage} />
-        <Redirect to="/:conversation_id" />
-      ) : (
-        // <>{handleRedirect(props)}</>
-        <Redirect to="/404"/>
-      )}
-    </div>
-  )
-}
-
-// const handleRedirect = (props) => {
-//   return <Redirect to="/404" />
-// }
-
-const isMatch = (conv_id) => {
-  return new Promise((resolve, reject) => {
-    PolisNet.polisGet("/api/v3/participationInit", {
-      conversation_id: conv_id,
-      pid: "mypid",
-      lang: "acceptLang",
-    }).then((res) => {
-      resolve(true);
-    }).fail((err) => {
-      resolve(false);
-    });
-  });
-}
-
-PrivateRoute.propTypes = {
-  component: PropTypes.element,
-  isLoading: PropTypes.bool,
-  location: PropTypes.object,
-  authed: PropTypes.bool
-}
 
 @connect((state) => {
   return state.user
@@ -243,12 +210,8 @@ class App extends React.Component {
           <Route exact path="/tos" component={TOS} />
           <Route exact path="/privacy" component={Privacy} />
 
-          <Route exact path="/404" component={DoesNotExist} />
-
-          {/* <Route path="/:conversation_id" component={TestPage}/> */}
-          <RouteOrRedirect2 path="/c/:conversation_id" component={TestPage}/>
-          {/* <Route path="/:conversation_id" component={RouteOrNotFound} /> */}
-          {/* <Route path="/:conversation_id" component={TestPage}/> */}
+          <Route exact path="/404" render={() => <DoesNotExist title={"Page not found"} />} />
+          <RouteOrRedirect path="/c/:conversation_id" component={TestPage}/>
 
           <InteriorHeader>
             <Route
