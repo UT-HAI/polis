@@ -30,7 +30,7 @@ import Account from './components/conversations-and-account/account'
 import Integrate from './components/conversations-and-account/integrate'
 
 import InteriorHeader from './components/interior-header'
-import TestPage from './components/testpage'
+import ConversationUI from './components/ConversationUI'
 import DoesNotExist from './components/DoesNotExist'
 import PolisNet from './util/net'
 import Loading from './components/Loading'
@@ -192,7 +192,6 @@ class App extends React.Component {
             render={() => <SignIn {...this.props} authed={this.isAuthed()} />}
           />
           <Route exact path="/signout" component={SignOut} />
-          <Route exact path="/testpage" component={TestPage} />
           <Route exact path="/signout/*" component={SignOut} />
           <Route exact path="/signout/**/*" component={SignOut} />
           <Route exact path="/createuser" component={CreateUser} />
@@ -211,7 +210,7 @@ class App extends React.Component {
           <Route exact path="/privacy" component={Privacy} />
 
           <Route exact path="/404" render={() => <DoesNotExist title={"Page not found"} />} />
-          <RouteOrRedirect path="/c/:conversation_id" component={TestPage}/>
+          <RouteOrRedirect path="/c/:conversation_id" component={ConversationUI}/>
 
           <InteriorHeader>
             <Route
