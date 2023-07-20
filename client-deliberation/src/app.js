@@ -212,79 +212,84 @@ class App extends React.Component {
           <Route exact path="/404" render={() => <DoesNotExist title={"Page not found"} />} />
           <RouteOrRedirect path="/c/:conversation_id" component={ConversationUI}/>
 
-          <InteriorHeader>
-            <Route
-              render={(routeProps) => {
-                if (routeProps.location.pathname.split('/')[1] === 'm') {
-                  return null
-                }
-                return (
-                  <Flex>
-                    <Box sx={{ mr: [5], p: [4], flex: '0 0 auto' }}>
-                      <Box sx={{ mb: [3] }}>
-                        <Link sx={{ variant: 'links.nav' }} to={`/`}>
-                          Conversations
-                        </Link>
-                      </Box>
-                      <Box sx={{ mb: [3] }}>
-                        <Link sx={{ variant: 'links.nav' }} to={`/integrate`}>
-                          Integrate
-                        </Link>
-                      </Box>
-                      <Box sx={{ mb: [3] }}>
-                        <Link sx={{ variant: 'links.nav' }} to={`/account`}>
-                          Account
-                        </Link>
-                      </Box>
+          <Route
+            exact
+            path="/"
+            render={(routeProps) => {
+              if (routeProps.location.pathname.split('/')[1] === 'm') {
+                return null
+              }
+              return (
+                <InteriorHeader>
+                <Flex>
+                  <Box sx={{ mr: [5], p: [4], flex: '0 0 auto' }}>
+                    <Box sx={{ mb: [3] }}>
+                      <Link sx={{ variant: 'links.nav' }} to={`/`}>
+                        Conversations
+                      </Link>
                     </Box>
-                    <Box
-                      sx={{
-                        p: [4],
-                        flex: '0 0 auto',
-                        maxWidth: '35em',
-                        mx: [4]
-                      }}>
-                      <PrivateRoute
-                        isLoading={this.isLoading()}
-                        authed={this.isAuthed()}
-                        exact
-                        path="/"
-                        component={Conversations}
-                      />
-                      <PrivateRoute
-                        isLoading={this.isLoading()}
-                        authed={this.isAuthed()}
-                        exact
-                        path="/conversations"
-                        component={Conversations}
-                      />
-                      <PrivateRoute
-                        isLoading={this.isLoading()}
-                        authed={this.isAuthed()}
-                        exact
-                        path="/account"
-                        component={Account}
-                      />
-                      <PrivateRoute
-                        isLoading={this.isLoading()}
-                        authed={this.isAuthed()}
-                        exact
-                        path="/integrate"
-                        component={Integrate}
-                      />
+                    <Box sx={{ mb: [3] }}>
+                      <Link sx={{ variant: 'links.nav' }} to={`/integrate`}>
+                        Integrate
+                      </Link>
                     </Box>
-                  </Flex>
-                )
-              }}
-            />
+                    <Box sx={{ mb: [3] }}>
+                      <Link sx={{ variant: 'links.nav' }} to={`/account`}>
+                        Account
+                      </Link>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      p: [4],
+                      flex: '0 0 auto',
+                      maxWidth: '35em',
+                      mx: [4]
+                    }}>
+                    <PrivateRoute
+                      isLoading={this.isLoading()}
+                      authed={this.isAuthed()}
+                      exact
+                      path="/"
+                      component={Conversations}
+                    />
+                    <PrivateRoute
+                      isLoading={this.isLoading()}
+                      authed={this.isAuthed()}
+                      exact
+                      path="/conversations"
+                      component={Conversations}
+                    />
+                    <PrivateRoute
+                      isLoading={this.isLoading()}
+                      authed={this.isAuthed()}
+                      exact
+                      path="/account"
+                      component={Account}
+                    />
+                    <PrivateRoute
+                      isLoading={this.isLoading()}
+                      authed={this.isAuthed()}
+                      exact
+                      path="/integrate"
+                      component={Integrate}
+                    />
+                  </Box>
+                </Flex>
+                </InteriorHeader>
+              )
+            }}
+          />
 
-            <PrivateRoute
-              isLoading={this.isLoading()}
-              path="/m/:conversation_id"
-              authed={this.isAuthed()}
-              component={ConversationAdminContainer}
-            />
-          </InteriorHeader>
+          <PrivateRoute
+            isLoading={this.isLoading()}
+            path="/m/:conversation_id"
+            authed={this.isAuthed()}
+            component={ConversationAdminContainer}
+          />
+
+          {/* <Route path="*" render={() => <DoesNotExist title={"Page not found"} />} /> */}
+          <Redirect to="/404" />
         </Switch>
       </>
     )
