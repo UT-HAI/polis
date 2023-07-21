@@ -40,11 +40,14 @@ class SignIn extends React.Component {
       password: this.password.value
     }
 
+    var dest = this.props.location.state?.from?.pathname ?? "/"
+
     // var dest = this.getDest();
     // if (!dest.length) {
     //   dest = "/";
     // }
-    this.props.dispatch(doSignin(attrs))
+    console.log(dest)
+    this.props.dispatch(doSignin(attrs, dest))
   }
 
   facebookButtonClicked() {
@@ -169,7 +172,7 @@ class SignIn extends React.Component {
     const { signInSuccessful, authed } = this.props
 
     if (signInSuccessful || authed) {
-      return <Redirect to={'/'} />
+      return <Redirect to={"/"}/>
     }
 
     return (

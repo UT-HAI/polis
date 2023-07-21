@@ -98,7 +98,6 @@ const RouteOrRedirect = (props) => {
   return (
     <div>
       {isConversationExists ? (
-        // <Route path={props.path} render={(routeProps) => <ConversationUI {...routeProps} response={responseObject}/>} />
         <Route
           path={props.path}
           render={(routeProps) =>
