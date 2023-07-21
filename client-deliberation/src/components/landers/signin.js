@@ -46,7 +46,6 @@ class SignIn extends React.Component {
     // if (!dest.length) {
     //   dest = "/";
     // }
-    console.log(dest)
     this.props.dispatch(doSignin(attrs, dest))
   }
 
@@ -172,7 +171,7 @@ class SignIn extends React.Component {
     const { signInSuccessful, authed } = this.props
 
     if (signInSuccessful || authed) {
-      return <Redirect to={"/"}/>
+      return <Redirect to={'/'}/>
     }
 
     return (
