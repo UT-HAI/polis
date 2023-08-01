@@ -63,8 +63,10 @@ const BarChartsForGroupVotes = ({
 
 
   const drawBarChartsForGroupVotesOnSelectedComment = () => {
+    // console.log("drawBarChartsForGroupVotesOnSelectedComment")
     let arr = []
-    _.each(groups, (group, i) => {
+    console.log("drawBarChartsForGroupVotesOnSelectedComment(), groups", groups)
+    _.forOwn(groups, (group, i) => {
 
       const closestPair = getLabelAnchorForHull(hullElems[group.id]);
 
@@ -79,6 +81,24 @@ const BarChartsForGroupVotes = ({
         </g>
       )
     })
+    // const keys = Object.keys(groups);
+
+    // for (let i = 0; i < keys.length; i++) {
+    //   const group = groups[keys[i]];
+    //   const closestPair = getLabelAnchorForHull(hullElems[group.id]);
+
+    //   arr.push(
+    //     <g key={group.id}>
+    //       <BarChartCompact
+    //         key={group.id}
+    //         selectedComment={selectedComment}
+    //         groupVotes={group /* hardcode first group for debug */}
+    //         translate={closestPair}
+    //         ptptCount={"ptptCount doesn't matter and isn't used because this barchart is for a group, not global"}/>
+    //     </g>
+    //   )
+
+    // }
     return arr;
   }
 

@@ -57,6 +57,7 @@ class GraphComment extends React.Component {
 class GraphComments extends React.Component {
 
   drawComments() {
+    console.log("drawComments()")
     let shouldShowOnlyOneGroup = _.isNumber(this.props.showOnlyGroup);
 
     return this.props.points.map((pt, i) => {
@@ -65,12 +66,14 @@ class GraphComments extends React.Component {
       let antiRepfulForGid = null;
       if (globals.shouldColorizeTidsByRepfulness) {
         let tid = pt.tid;
+        console.log("drawComments(), this.props.repfulAgreeTidsByGroup", this.props.repfulAgreeTidsByGroup)
         _.each(this.props.repfulAgreeTidsByGroup, (tids, gid) => {
           if (tids && tids.indexOf(tid) >= 0) {
             // console.log('rep', tid, gid);
             repfulForGid = Number(gid);
           }
         });
+        console.log("drawComments(), this.props.repfulDisageeTidsByGroup", this.props.repfulDisageeTidsByGroup)
         _.each(this.props.repfulDisageeTidsByGroup, (tids, gid) => {
           if (tids && tids.indexOf(tid) >= 0) {
             // console.log('!rep', tid, gid);

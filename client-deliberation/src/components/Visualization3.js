@@ -11,6 +11,9 @@ const Visualization3 = ( {} ) => {
   const [loading, setLoading] = useState(true);
   const [visObject, setVisObject] = useState({});
 
+  const [curationType, setCurationType] = useState(null); //"majority" or number
+  const [tidsToShow, setTidsToShow] = useState([]);
+
   var JakeComments = null;
   var JakeMathMain = null;
   var JakeTidsToShow = [];
@@ -49,6 +52,24 @@ const Visualization3 = ( {} ) => {
       }
     )
   }, [])
+
+  useEffect(() => {
+  //   if (!loading){
+  //         console.log("mathMain!!!!", mathMain);
+  //   if (_.isNull(curationType)) {
+
+  //   } else if (curationType === "majority") {
+  //     const agreeTids = mathMain.consensus.agree.map(c => c.tid);
+  //     const disagreeTids = mathMain.consensus.disagree.map(c => c.tid);
+  //     setTidsToShow([...agreeTids, ...disagreeTids]);
+  //   } else if (_.isNumber(curationType)) {
+  //     var gid = curationType;
+  //     setTidsToShow(mathMain.repness[gid].map(c => c.tid));
+  //   } else {
+  //     console.error("unknown curationType:", that.curationType);
+  //   }
+  // }
+  }, [curationType])
 
   // useEffect(() => {
   //   (async () => {
@@ -1063,7 +1084,11 @@ const Visualization3 = ( {} ) => {
         ptptois={visObject.ptptois}
         votesByMe={visObject.votesByMe}
         onVoteClicked={() => {}}
-        onCurationChange={() => {}}
+        onCurationChange={() => {}
+        //   (newCurationType) => {
+        //   setCurationType(newCurationType)
+        // }
+      }
         Strings={Strings}
       />
     );

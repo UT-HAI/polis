@@ -271,19 +271,26 @@ const graphUtil = (comments, math, badTids, ptptois) => {
 
     function addPoint(o) {
       if (pointsForHullGeneration[o.gid]) {
+        console.log("TRUE")
         pointsForHullGeneration[o.gid].push(o);
       } else {
         pointsForHullGeneration[o.gid] = [o];
       }
     }
+
+    console.log("baseClusters", baseClusters)
     baseClustersScaled.forEach(addPoint);
 
     // ptptoisProjected.forEach(addPoint);
 
     const hulls = [];
 
-    _.each(pointsForHullGeneration, (group) => {
+    console.log("hulls array initialized")
+    console.log("graphUtil(), pointsForHullGeneration", pointsForHullGeneration)
+
+    _.forOwn(pointsForHullGeneration, (group) => {
       const pairs = group.map((g) => { /* create an array of arrays */
+        console.log("returning pair")
         return [g.x, g.y]
       })
       const hull = createHull(
@@ -295,6 +302,29 @@ const graphUtil = (comments, math, badTids, ptptois) => {
         hull,
       })
     })
+
+    /*
+    const keys = Object.keys(pointsForHullGeneration);
+
+    for (let i = 0; i < keys.length; i++) {
+      const group = pointsForHullGeneration[keys[i]];
+    
+      const pairs = group.map((g) => {
+        console.log("returning pair");
+        return [g.x, g.y];
+      });
+    
+      const hull = createHull(
+        pairs,
+        400
+      );
+    
+      hulls.push({
+        group,
+        hull,
+      });
+    }
+    */
 
 
     let groupCornerAssignments = getGroupCornerAssignments(math);
