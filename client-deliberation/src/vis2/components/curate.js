@@ -37,26 +37,25 @@ class Curate extends React.Component {
     };
   }
 
+  getGroupButtons = () => {
+    const buttons = []
+    for (const key in this.props.math["group-votes"]) {
+      const group = this.props.math["group-votes"][key]
+      buttons.push(
+        <Button
+          key={globals.groupLabels[group.id]}
+          handleCurateButtonClick={this.props.handleCurateButtonClick}
+          selectedTidCuration={this.props.selectedTidCuration}
+          identifier={group.id}>
+          {globals.groupLabels[group.id]}
+        </Button>
+      )
+    }
+    return buttons;
+  }
+
 
   render () {
-
-    const getGroupButtons = (() => {
-      const buttons  = []
-      for (const key in this.props.math["group-votes"]) {
-        const group = this.props.math["group-votes"][key]
-        console.log("group", group)
-        buttons.push(
-              <Button
-                key={globals.groupLabels[group.id]}
-                handleCurateButtonClick={this.props.handleCurateButtonClick}
-                selectedTidCuration={this.props.selectedTidCuration}
-                identifier={group.id}>
-                {globals.groupLabels[group.id]}
-              </Button>
-            )
-      }
-      return buttons;
-    })
 
     return (
       <div style={{
@@ -88,7 +87,7 @@ class Curate extends React.Component {
             {this.props.Strings.group_123}
           </p>
           {
-            getGroupButtons()
+            this.getGroupButtons()
           }
         </div>
       </div>
