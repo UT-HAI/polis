@@ -8,8 +8,6 @@ const Button = (props) => {
     props.handleCurateButtonClick(props.identifier)
   }
 
-    // console.log("button id is", props.identifier)
-
     return (
       <button style={{
         border: "none",
@@ -42,17 +40,12 @@ class Curate extends React.Component {
 
   render () {
 
-    // const groupButtons = _.mapValues({'a' : 1, 'b' : 2, 'c' : 3}, function(group){
-    //   return (group * group)
-    // })
-
-    const groupButtons = (() => {
-      const ar  = []
+    const getGroupButtons = (() => {
+      const buttons  = []
       for (const key in this.props.math["group-votes"]) {
-        
         const group = this.props.math["group-votes"][key]
         console.log("group", group)
-        ar.push(
+        buttons.push(
               <Button
                 key={globals.groupLabels[group.id]}
                 handleCurateButtonClick={this.props.handleCurateButtonClick}
@@ -62,12 +55,9 @@ class Curate extends React.Component {
               </Button>
             )
       }
-      return ar;
+      return buttons;
     })
 
-    // console.log("hello again", this.props.math)
-    console.log("hello there", this.props.math["group-votes"])
-    console.log("group buttons", groupButtons())
     return (
       <div style={{
         display: "flex",
@@ -98,37 +88,7 @@ class Curate extends React.Component {
             {this.props.Strings.group_123}
           </p>
           {
-            groupButtons()
-            // Jake - loop thru keys instead,
-            // access value from key
-            // and then do function
-            // _.map(this.props.math["group-votes"], (group) => {
-            //   console.log("here", group)
-            //   return (
-            //     <Button
-            //       key={globals.groupLabels[group.id]}
-            //       handleCurateButtonClick={this.props.handleCurateButtonClick}
-            //       selectedTidCuration={this.props.selectedTidCuration}
-            //       identifier={group.id}>
-            //       {globals.groupLabels[group.id]}
-            //     </Button>
-            //   )
-            // })
-
-            // Object.keys(this.props.math["group-votes"]).forEach((key, idx) => {
-            //   const group = this.props.math["group-votes"][key]
-            //   console.log("here", group)
-            //   return (
-            //     <Button
-            //       key={globals.groupLabels[group.id]}
-            //       handleCurateButtonClick={this.props.handleCurateButtonClick}
-            //       selectedTidCuration={this.props.selectedTidCuration}
-            //       identifier={group.id}>
-            //       {globals.groupLabels[group.id]}
-            //     </Button>
-            //   )
-            // })
-            
+            getGroupButtons()
           }
         </div>
       </div>
