@@ -2,11 +2,13 @@ import _ from "lodash";
 import React from "react";
 import * as globals from "./globals";
 
-const Button = (props) => {
+class Button extends React.Component {
 
-  const handleClick = () => {
-    props.handleCurateButtonClick(props.identifier)
+  handleClick() {
+    this.props.handleCurateButtonClick(this.props.identifier)
   }
+
+  render () {
 
     return (
       <button style={{
@@ -15,16 +17,16 @@ const Button = (props) => {
         marginRight: 5,
         cursor: "pointer",
         padding: "6px 12px",
-        fontWeight: (!_.isNull(props.selectedTidCuration) && props.selectedTidCuration === props.identifier) ? 700 : 500,
-        backgroundColor: (!_.isNull(props.selectedTidCuration) && props.selectedTidCuration === props.identifier) ? "#03a9f4" : "rgb(235,235,235)",
-        color: (!_.isNull(props.selectedTidCuration) && props.selectedTidCuration === props.identifier) ? "rgb(255,255,255)" : "rgb(100,100,100)",
+        fontWeight: (!_.isNull(this.props.selectedTidCuration) && this.props.selectedTidCuration === this.props.identifier) ? 700 : 500,
+        backgroundColor: (!_.isNull(this.props.selectedTidCuration) && this.props.selectedTidCuration === this.props.identifier) ? "#03a9f4" : "rgb(235,235,235)",
+        color: (!_.isNull(this.props.selectedTidCuration) && this.props.selectedTidCuration === this.props.identifier) ? "rgb(255,255,255)" : "rgb(100,100,100)",
         borderRadius: 4,
       }}
-      onClick={handleClick.bind(this)}>
-        {props.children}
+      onClick={this.handleClick.bind(this)}>
+        {this.props.children}
       </button>
     )
-  // }
+  }
 }
 
 class Curate extends React.Component {
@@ -56,7 +58,6 @@ class Curate extends React.Component {
 
 
   render () {
-
     return (
       <div style={{
         display: "flex",

@@ -1061,10 +1061,9 @@ const Visualization3 = ( {} ) => {
         onVoteClicked={() => {}}
         onCurationChange={
           (newCurationType) => {
-          console.log("onCurationChange called")
-          changeCuration(newCurationType)
+            changeCuration(newCurationType)
+          }
         }
-      }
         Strings={Strings}
       />
     );
