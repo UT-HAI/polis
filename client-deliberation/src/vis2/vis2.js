@@ -51,7 +51,6 @@ class Root extends React.Component {
     let repfulAgreeTidsByGroup = {};
     let repfulDisageeTidsByGroup = {};
     if (mathResult.repness) {
-      console.log("Root.render(), mathResult.repness", mathResult.repness)
       _.forOwn(mathResult.repness, (entries, gid) => {
         entries.forEach((entry) => {
           if (entry['repful-for'] === 'agree') {

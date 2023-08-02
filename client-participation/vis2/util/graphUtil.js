@@ -281,8 +281,6 @@ const graphUtil = (comments, math, badTids, ptptois) => {
 
     const hulls = [];
 
-    console.log("graphUtil(), pointsForHullGeneration", pointsForHullGeneration)
-
     _.each(pointsForHullGeneration, (group) => {
       const pairs = group.map((g) => { /* create an array of arrays */
         return [g.x, g.y]

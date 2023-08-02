@@ -64,7 +64,6 @@ const BarChartsForGroupVotes = ({
 
   const drawBarChartsForGroupVotesOnSelectedComment = () => {
     let arr = []
-    console.log("drawBarChartsForGroupVotesOnSelectedComment(), groups", groups)
     _.each(groups, (group, i) => {
       const closestPair = getLabelAnchorForHull(hullElems[group.id]);
 
