@@ -49,6 +49,8 @@ helpersInitialized.then(
       fetchIndexForReportPage,
       fetchIndexWithoutPreloadData,
       getPidForParticipant,
+      updateTutorialDoneByEmail,
+      handle_GET_TutorialText,
       haltOnTimeout,
       HMAC_SIGNATURE_PARAM_NAME,
       hostname,
@@ -62,6 +64,10 @@ helpersInitialized.then(
       redirectIfNotHttps,
       timeout,
       writeDefaultHead,
+
+      handle_GET_gptSummary,
+      handle_GET_gptSummary_tree,
+      handle_GET_raw_data,
 
       middleware_log_request_body,
       middleware_log_middleware_errors,
@@ -285,6 +291,37 @@ helpersInitialized.then(
       want("math_tick", getInt, assignToP, -1),
       handle_GET_math_correlationMatrix
     );
+
+    app.get(
+      "/api/v3/getTutorialText",
+      moveToBody,
+      handle_GET_TutorialText
+    )
+
+
+    app.post(
+      "/api/v3/updateTutorialDoneByEmail",
+      need("email", getEmail, assignToP),
+      updateTutorialDoneByEmail
+    );
+    // app.post("/api/v3/updateTutorialDoneByEmail", async (req, res) => {
+    //   console.log("Hello World")
+    //   try {
+    //     console.log("Request body:", req.body);  // Log the request body to see what is being sent
+    //     // If you have middleware functions, ensure they are not causing the issue
+    //     // For example, if moveToBody or auth(assignToP) are middleware functions,
+    //     // console.log their output or behavior
+    
+    //     // Call your function and ensure it’s working correctly
+    //     const result = await updateTutorialDoneByEmail(req.body.email);  // assuming email is sent in the body
+    //     console.log("Function result:", result);  // Log the result of your function
+    //     res.status(200).send(result);  // Send the result back as the response
+    //   } catch (error) {
+    //     console.error("Server Error:", error);  // Log any server error
+    //     res.status(500).send("Internal Server Error");  // Respond with a 500 status code
+    //   }
+    // });
+    
 
     app.get(
       "/api/v3/dataExport",
@@ -1065,6 +1102,25 @@ helpersInitialized.then(
       // TODO want('lastMetaTime', getInt, assignToP, 0),
       handle_GET_metadata_questions
     );
+
+    app.get("/api/v3/gptSummary",
+    moveToBody,
+    handle_GET_gptSummary
+    )
+
+    
+    app.get("/api/v3/gptSummarytree",
+    moveToBody,
+    handle_GET_gptSummary_tree
+    )
+
+    app.get("/api/v3/rawdata",
+    moveToBody,
+    handle_GET_raw_data
+    )
+
+    ,
+
 
     app.post(
       "/api/v3/metadata/questions",

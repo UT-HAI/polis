@@ -40,6 +40,8 @@ import dbPgQuery from "./db/pg-query";
 import Config from "./config";
 import fail from "./utils/fail";
 
+import OpenAI from "openai";
+
 import {
   Body,
   DetectLanguageResult,
@@ -108,6 +110,8 @@ import logger from "./utils/logger";
 import emailSenders from "./email/senders";
 const sendTextEmail = emailSenders.sendTextEmail;
 const sendTextEmailWithBackupOnly = emailSenders.sendTextEmailWithBackupOnly;
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });  
+
 
 const resolveWith = (x: { body?: { user_id: string } }) => {
   return Promise.resolve(x);
@@ -1074,6 +1078,132 @@ function initializePolisHelpers() {
 
   function auth(assigner: any) {
     return _auth(assigner, false);
+  }
+
+  
+  async function handle_GET_raw_data(req, res) {
+    // Assuming `zid` is passed as a query parameter; otherwise, adjust as needed
+    // const zid = parseInt(req.query.zid, 10);
+    const zid = 5;
+
+    if (isNaN(zid)) {
+        res.status(400).send('Invalid zid provided');
+        return;
+    }
+
+    return pgQueryP("SELECT * FROM votes WHERE zid = $1;", [zid])
+        .then((rows: any[]) => {
+            if (!rows || !rows.length) {
+                // No rows found for the given zid
+                res.status(404).send('No data found');
+                return null;
+            }
+            res.status(200).json(rows); // Send the found rows as JSON
+            return rows;
+        })
+        .catch((error) => {
+            console.error('Error executing query:', error);
+            res.status(500).send('Internal server error');
+            throw error;
+        });
+}
+
+
+  async function handle_GET_gptSummary_tree(req, res) {
+    try {
+      
+      // Extracting the question string from the request
+      const questionString = req.body.question;
+      const completion = await openai.chat.completions.create({
+        messages: [
+          {"role": "system", "content": "You are a helpful assistant."},
+          {
+            "role": "user",
+            "content": "This is the discussionUse Cases for Unmanned Aerial Mobility (UAM)These are the discussion statements[{txt:I would be willing to commute with UAMs at least once in my life.,tid:0},{txt:I would be willing to pay 30 $ to drive with an UAM from the University to The Domain.\n,tid:1},{txt:UAMs should deliver my online shopping packages.,tid:2},{txt:I would not mind that UAMs fly over my house.\n,tid:3},{txt:I would be ok if there would be a landing pad in the radius of 0.5 mile of my house.\n,tid:4},{txt:I am interested in using UAMs instead of services like Uber, Lyft or Taxis.\n,tid:5},{txt:I would be willing to pay 70 $ to drive with an UAM from the University to The Domain.\n,tid:6},{txt:I would take a UAM even if it is as loud as 110db (db if someone would shout at you directly).,tid:7},{txt:I would not mind when UAMs constantly fly over my garden.,tid:8},{txt:I would feel safe taking a UAM even if there was minor turbulence.,tid:9This thread describes use cases for Unmanned Aerial MobilityPlease identify the three main topics of the discussion. Please provide them in the following schema [topic1] [topic2] [topic3].",
+        },
+        {
+            "role": "assistant",
+            "content": "[Commuting using UAMs] [Delivery services by UAMs] [Acceptance of noise pollution]",
+        },
+          { "role": "user", "content": questionString },
+          
+        ],
+        model: "gpt-3.5-turbo",
+      });
+
+      console.log(completion)
+      // Check if the response is valid and is a string
+      if (completion.choices[0].message && typeof completion.choices[0].message.content === 'string') {
+        // Send the AI's response as a message
+        res.status(200).json({ message: completion.choices[0].message.content });
+      } else {
+        // Handle cases where the response is not in the expected format
+        console.error('Received non-string message content');
+        res.status(500).json({ error: 'Invalid response format from AI' });
+      }
+    } catch (err) {
+      // In case of any error, send an error response
+      console.error('Error during API request:', err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async function handle_GET_gptSummary(req, res) {
+    try {
+      
+      // Extracting the question string from the request
+      const questionString = req.body.question;
+  
+
+      // const completion = await openai.chat.completions.create({
+      //   messages: [
+      //     {"role": "system", "content": "You are a helpful assistant."},
+      //     { "role": "user", "content": questionString },
+          
+      //   ],
+      //   model: "gpt-3.5-turbo",
+      // });
+
+      // Analyzing the provided data, the sentiment leans positively towards the affordability and convenience that urban air mobility (UAM) could offer, with a willingness to embrace new transportation methods at a lower price point and a general openness to integrating UAM into their daily lives, such as package delivery and short-distance travel. However, there is a clear reluctance to accept higher costs, significant noise pollution, or persistent intrusion into personal living spaces. Additionally, safety concerns arise with the prospect of flying in less than ideal conditions, suggesting that while there is excitement about the potential of UAM, it is tempered by practical considerations of cost, noise, and safety.
+
+
+       /**
+       * INDEPENDET VARIABLE 4
+       * Graph Summary
+       * The entire graph is summarized, including the comments and the graph results.
+      */
+      const completion = await openai.chat.completions.create({
+        messages: [
+          {"role": "system", "content": "You are a helpful assistant."},
+          {
+            "role": "user",
+            "content": "The topic is about Use Cases for Unmanned Aerial Mobility (UAM). The graph in the picture was made by voting on the following statements with true or false:I would be willing to commute with UAMs at least once in my life., I would be willing to pay 30 $ to drive with an UAM from the University to “The Domain” ,UAMs should deliver my online shopping packages., I would not mind that UAMs fly over my house., I would be ok if there would be a landing pad in the radius of 0.5 mile of my house., I am interested in using UAMs instead of services like Uber, Lyft or Taxis., I would be willing to pay 70 $ to drive with an UAM from the University to “The Domain”., I would take a UAM even if it is as loud as 110db (db if someone would shout at you directly)., I would not mind when UAMs constantly fly over my garden., I would feel safe taking a UAM even if there was minor turbulence., group-aware-consensus: Object { 0: 0.37500000000000006, 1: 0.35555555555555557, 2: 0.07500000000000001, … } ​​ 0: 0.37500000000000006 ​​ 1: 0.35555555555555557 ​​ 2: 0.07500000000000001 ​​ 3: 0.15555555555555556 ​​ 4: 0.17777777777777778 ​​ 5: 0.37500000000000006 ​​ 6: 0.37500000000000006 ​​ 7: 0.125 ​​ 8: 0.35555555555555557 ​​ 9: 0.15000000000000002test123 Array(10) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…} ] Object { n: 11, pca: {…}, tids: (10) […], mod-in: (10) […], n-cmts: 10, in-conv: (11) […], mod-out: [], repness: {…}, consensus: {…}, meta-tids: [], … } ​ base-clusters: Object { x: (11) […], y: (11) […], id: (11) […], … } ​ comment-priorities: Object { 0: 6.681868278253146, 1: 8.673498923495485, 2: 4.159428209567921, … } ​ consensus: Object { agree: [], disagree: [] } ​ group-aware-consensus Object { 0: 0.37500000000000006, 1: 0.35555555555555557, 2: 0.07500000000000001, … } ​​ 0: 0.37500000000000006 ​​ 1: 0.35555555555555557 ​​ 2: 0.07500000000000001 ​​ 3: 0.15555555555555556 ​​ 4: 0.17777777777777778 ​​ 5: 0.37500000000000006 ​​ 6: 0.37500000000000006 ​​ 7: 0.125 ​​ 8: 0.35555555555555557 ​​ 9: 0.15000000000000002 ​​ repness: { 0: [ { tid: 3, p-test: 2.121320343559643,n-agree: 6, repness: 3.888888888888889, n-trials: 7, n-success: 6, p-success: 0.7777777777777778, best-agree: true, repful-for: agree, repness-test: 2.1650636 } ], 1: [ { tid: 1, p-test: 2, n-agree: 3, repness: 1.8, n-trials: 3, n-success: 3, p-success: 0.8, best-agree: true, repful-for: agree, repness-test: 1.7320508 }, { tid: 8, p-test: 2, repness: 1.8, n-trials: 3, n-success: 3, p-success: 0.8, repful-for: agree, repness-test: 1.7320508 }, {tid: 3, p-test: 2, repness: 7.2, n-trials: 3, n-success: 3, p-success: 0.8, repful-for: disagree, repness-test: 2.8982754 }, { tid: 7, p-test: 2, repness: 3.2, n-trials 3, n-success: 3, p-success: 0.8, repful-for: disagree, repness-test: 2.2886887 }, { tid: 2, p-test: 2, repness: 1.6, n-trials: 3, n-success: 3, p-success: 0.8, repful-for: disagree, repness-test: 1.535299 } ] },Please try to make sense about what the values say about the comments. Please interpret if the people agree with the statement or not and what the overall mood of the topic is. Please make it into one paragraph and don't directly tell which statements they have.",
+        },
+        {
+            "role": "assistant",
+            "content": "Analyzing the provided data, the sentiment leans positively towards the affordability and convenience that urban air mobility (UAM) could offer, with a willingness to embrace new transportation methods at a lower price point and a general openness to integrating UAM into their daily lives, such as package delivery and short-distance travel. However, there is a clear reluctance to accept higher costs, significant noise pollution, or persistent intrusion into personal living spaces. Additionally, safety concerns arise with the prospect of flying in less than ideal conditions, suggesting that while there is excitement about the potential of UAM, it is tempered by practical considerations of cost, noise, and safety.",
+        },
+          { "role": "user", "content": questionString },
+          
+        ],
+        model: "gpt-3.5-turbo",
+      });
+
+      console.log(completion)
+      // Check if the response is valid and is a string
+      if (completion.choices[0].message && typeof completion.choices[0].message.content === 'string') {
+        // Send the AI's response as a message
+        res.status(200).json({ message: completion.choices[0].message.content });
+      } else {
+        // Handle cases where the response is not in the expected format
+        console.error('Received non-string message content');
+        res.status(500).json({ error: 'Invalid response format from AI' });
+      }
+    } catch (err) {
+      // In case of any error, send an error response
+      console.error('Error during API request:', err);
+      res.status(500).json({ error: err.message });
+    }
   }
 
   function enableAgid(req: { body: Body }, res: any, next: () => void) {
@@ -2411,6 +2541,194 @@ function initializePolisHelpers() {
     );
   }
 
+  function updateTutorialProgressByEmail(email: string) {
+    email = email.toLowerCase();
+    
+    return pgQueryP_readOnly(
+      "SELECT uid FROM users WHERE LOWER(email) = ($1);",
+      [email]
+      // Handle type issues as needed, possibly using @ts-ignore or adjusting types
+    ).then(function (rows: any) {  // Adjust type as needed
+      if (!rows || !rows.length) {
+        throw new Error("polis_err_no_user_matching_email");
+      }
+      const uid = rows[0].uid;
+      
+      return pg.queryP(
+        "UPDATE users SET tutorialprogress = 1 WHERE uid = $1",
+        [uid]
+      ).then((updateResult: any) => {
+        console.log('User tutorial_done updated successfully:', updateResult);
+        return updateResult;
+      });
+    }).catch((err: any) => {
+      console.error('Error updating tutorial_done for user by email:', err);
+      throw err;  // or handle error as appropriate for your application
+    });
+  }
+  
+  function updateUserTutorialProgress(uid: any) {
+    // First, fetch the current tutorialprogress value
+    return pgQueryP(
+      "SELECT tutorialprogress FROM users WHERE uid = $1",
+      [uid]
+    )
+    .then((result: any) => {
+      if (result && result.length > 0) {
+        const currentProgress = result[0].tutorialprogress;
+        const newProgress = currentProgress + 1;
+
+        // Now, update the tutorialprogress with the incremented value
+        return pgQueryP(
+          "UPDATE users SET tutorialprogress = $1 WHERE uid = $2",
+          [newProgress, uid]
+        );
+      } else {
+        throw new Error('User not found');
+      }
+    })
+    .then((updateResult: any) => {
+      console.log('User updated successfully:', updateResult);
+      return updateResult;
+    })
+    .catch((error: any) => {
+      console.error('Error updating user tutorial progress:', error);
+      throw error;
+    });
+}
+
+function handle_GET_TutorialText(
+  req: {
+    
+  },
+  res: {
+    
+    json: (arg0: {}) => void;
+  }
+
+) {
+ 
+  return new Promise(function (resolve, reject) {
+    pgQuery(
+      "SELECT * FROM tutorialText;",
+      [],
+      function (err, results) {
+        if (err) {
+          reject(err);
+          res.status(500).json({ error: err.message });
+        } else if (!results || !results.rows || !results.rows.length) {
+          reject(new Error("Error: No tutorial text found"));
+          res.status(404).json({ error: "Error: No tutorial text found" });
+        } else {
+          resolve(results.rows);
+          res.status(200).json(results.rows);
+        }
+      }
+    );
+  });}
+// const fakeTutorialTexts = [
+  //   {
+  //     uid: 1,
+  //     name: 'Introduction to SQL',
+  //     subheading_one: 'What is SQL?',
+  //     subheading_two: 'Basics of SQL',
+  //     paragraph_one: 'SQL, or Structured Query Language, is a standard language for accessing and manipulating databases...',
+  //     paragraph_two: 'With SQL, you can insert, search, update, delete, create, and modify records in your database...',
+  //     conclusion: 'Knowing SQL is a fundamental skill for anyone involved in data management or analysis...',
+  //     bulletpoint_one: ['CRUD operations', 'Database schemas', 'Data types in SQL'],
+  //     bulletpoint_two: ['Benefits of using SQL', 'SQL vs NoSQL', 'Common SQL database systems']
+  //   },
+  //   // ... potentially more tutorial texts
+  // ];
+
+  // res.json({
+  //   test: fakeTutorialTexts,
+  // });
+  // getAllTutorialTexts()
+  //   .then(tutorialTexts => {
+  //     res.json({ tutorialTexts });
+  //   })
+  //   .catch(err => {
+  //     // Log the error or handle it as per your requirements
+  //     res.status(500).json({ error: 'Failed to retrieve tutorial texts', details: err });
+  //   });
+ 
+
+  function updateTutorialDoneByEmail(
+  //   req: { p: { email: any } },
+  //   res: {
+  //     status: (
+  //       arg0: number
+  //     ) => {
+  //       (): any;
+  //       new (): any;
+  //       json: { (arg0: string): void; new (): any };
+  //     };
+  //   }
+  // ) {
+  //   let email = req.p.email;
+
+  //   let server = getServerNameWithProtocol(req);
+
+  //   // let's clear the cookies here, in case something is borked.
+  //   clearCookies(req, res);
+
+  //   function finish() {
+  //     res
+  //       .status(200)
+  //       .json("Tutorial updated");
+  //   }
+
+  //   updateTutorialProgressByEmail(email).then(
+  //     console.log("help")
+  //   )
+  req: { p: { email: any } },
+  res: {
+    status: (
+      arg0: number
+    ) => {
+      (): any;
+      new (): any;
+      json: { (arg0: string): void; new (): any };
+    };
+  }
+) {
+  let email = req.p.email;
+
+  let server = getServerNameWithProtocol(req);
+
+  // let's clear the cookies here, in case something is borked.
+  clearCookies(req, res);
+
+  function finish() {
+    res
+      .status(200)
+      .json("Password reset email sent, please check your email.");
+  }
+
+  getUidByEmail(email).then((uid:any) =>{
+    updateUserTutorialProgress(uid)
+    
+
+  }
+    // function (uid?: any) {
+      // setupPwReset(uid, function (err: any, pwresettoken: any) {
+      //   sendPasswordResetEmail(
+      //     uid,
+      //     pwresettoken,
+      //     server,
+      //     function (err: any) {
+      //       if (err) {
+      //         fail(res, 500, "Error: Couldn't send password reset email.", err);
+      //         return;
+      //       }
+      //       finish();
+      //     }
+      //   );
+      // });
+  )
+  }
+
   function sendPasswordResetEmailFailure(email: any, server: any) {
     let body = `We were unable to find a pol.is account registered with the email address: ${email}
 
@@ -2445,6 +2763,18 @@ Feel free to reply to this email if you need help.`;
       return rows[0].uid;
     });
   }
+
+function getAllTutorialTexts() {
+  return new Promise((resolve, reject) => {
+    pg.query_readOnly(
+      "SELECT * FROM tutorialText",
+      []).then((element) => {
+         return {stuff: element}
+      })
+      
+    ;
+  });
+}
 
   function clearCookie(
     req: { [key: string]: any; headers?: { origin: string } },
@@ -13887,6 +14217,37 @@ Thanks for using Polis!
     });
   }
 
+
+
+  // async function updateTutorialDoneByEmail(email: string) {
+  //   try {
+  //     // Step 1: Retrieve uid by email
+  //     const userResult = await pg.queryP_readOnly(
+  //       "SELECT uid FROM users WHERE email = $1 LIMIT 1",
+  //       [email]
+  //     );
+  
+  //     if (!userResult || !userResult.rows || !userResult.rows.length) {
+  //       console.error('No user found with the provided email:', email);
+  //       return;  // Or handle this case as appropriate for your application
+  //     }
+  
+  //     const uid = userResult.rows[0].uid;
+  
+  //     // Step 2: Update tutorial_done for retrieved uid
+  //     const updateResult = await pg.queryP(
+  //       "UPDATE users SET tutorialprogress = 1 WHERE uid = $1",
+  //       [uid]
+  //     );
+  
+  //     console.log('User tutorial_done updated successfully:', updateResult);
+  //     return updateResult;
+  //   } catch (err) {
+  //     console.error('Error updating tutorial_done for user by email:', err);
+  //     throw err;  // or handle error as appropriate for your application
+  //   }
+  // }
+
   function middleware_log_request_body(
     req: { body: any; path: string },
     res: any,
@@ -14004,6 +14365,9 @@ Thanks for using Polis!
     handle_GET_comments_translations,
     handle_GET_conditionalIndexFetcher,
     handle_GET_contexts,
+    handle_GET_gptSummary,
+    handle_GET_gptSummary_tree,
+    handle_GET_raw_data,
     handle_GET_conversationPreloadInfo,
     handle_GET_conversations,
     handle_GET_conversationsRecentActivity,
@@ -14059,6 +14423,8 @@ Thanks for using Polis!
     handle_POST_auth_login,
     handle_POST_auth_new,
     handle_POST_auth_password,
+    updateTutorialDoneByEmail,
+    handle_GET_TutorialText,
     handle_POST_auth_pwresettoken,
     handle_POST_comments,
     handle_POST_contexts,

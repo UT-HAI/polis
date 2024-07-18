@@ -8,7 +8,7 @@ import { populateUserStore } from './actions'
 
 import _ from 'lodash'
 
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
+import { Switch, Route, Link, Redirect, useHistory } from 'react-router-dom'
 import { Flex, Box, jsx } from 'theme-ui'
 
 /* landers */
@@ -35,12 +35,18 @@ import DoesNotExist from './components/DoesNotExist'
 import PolisNet from './util/net'
 import Loading from './components/Loading'
 import IndividualDeliberation from './components/IndividualDeliberation'
+import UnderstandAI from './components/UnderstandAI'
+import Legal from './components/Legal'
 import Visualization from './components/Visualization'
+import Deliberation from './components/Deliberation'
+import PollTutorial from './components/PollTutorial'
+import CreateuserPoll from './components/landers/createuserPoll'
 
 const PrivateRoute = ({ component: Component, isLoading, authed, ...rest }) => {
   if (isLoading) {
     return null
   }
+ 
   return (
     <Route
       {...rest}
@@ -49,13 +55,14 @@ const PrivateRoute = ({ component: Component, isLoading, authed, ...rest }) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: '/signin', state: { from: props.location } }}
+            to={{ pathname: '/404' }}
           />
         )
       }
     />
   )
 }
+
 
 PrivateRoute.propTypes = {
   component: PropTypes.element,
@@ -103,7 +110,7 @@ const RouteOrRedirect = (props) => {
         <Route
           path={props.path}
           render={(routeProps) =>
-            true === true ? (
+            props.isAuthed === true ? (
               <ConversationUI {...routeProps} response={responseObject}/>
             ) : (
               <Redirect
@@ -127,10 +134,15 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      sidebarOpen: false
+      sidebarOpen: false,
+       response: null,
+      showPoll: false,
+      routeProps: null,
       // sidebarDocked: true,
     }
   }
+
+
 
   loadUserData() {
     this.props.dispatch(populateUserStore())
@@ -138,11 +150,23 @@ class App extends React.Component {
 
   componentWillMount() {
     this.loadUserData()
-     // Jake - the below line somehow affects when the visualizations show up
+    // Jake - the below line somehow affects when the visualizations show up
     const mql = window.matchMedia(`(min-width: 800px)`)
     mql.addListener(this.mediaQueryChanged.bind(this))
     this.setState({ mql: mql, docked: mql.matches })
   }
+
+  handleResponse = (response) => {
+    console.log("handleResponse called with:", response);
+    this.setState({ response });
+  }
+
+  handleRouteProps = (routeProps) => {
+    this.setState({ routeProps });
+}
+  setShowPoll = (showPoll) => {
+    this.setState({ showPoll });
+  } 
 
   isAuthed() {
     let authed = false
@@ -163,6 +187,10 @@ class App extends React.Component {
 
   isDeveloper() {
     let isDev = false
+
+    if((this.props.user != null) && this.props.user.admin){
+      isDev = true
+    }
 
     if (!_.isUndefined(this.props.isDeveloper) && this.props.isDeveloper) {
       isDev = true
@@ -206,6 +234,7 @@ class App extends React.Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen })
   }
 
+  
   render() {
     const { location } = this.props
     return (
@@ -218,6 +247,7 @@ class App extends React.Component {
             path="/signin"
             render={() => <SignIn {...this.props} authed={this.isAuthed()} />}
           />
+         
           <Route
             exact
             path="/signin/*"
@@ -228,10 +258,17 @@ class App extends React.Component {
             path="/signin/**/*"
             render={() => <SignIn {...this.props} authed={this.isAuthed()} />}
           />
+          <Route
+    exact
+    path="/createUserPoll"
+    render={(routeProps) => <CreateuserPoll {...routeProps} />}
+/>
           <Route exact path="/signout" component={SignOut} />
           <Route exact path="/signout/*" component={SignOut} />
           <Route exact path="/signout/**/*" component={SignOut} />
           <Route exact path="/createuser" component={CreateUser} />
+          
+
           <Route exact path="/createuser/*" component={CreateUser} />
           <Route exact path="/createuser/**/*" component={CreateUser} />
 
@@ -248,18 +285,53 @@ class App extends React.Component {
 
           <Route exact path="/testvis" component={Visualization} />
 
-          <Route exact path="/404" render={() => <DoesNotExist title={"Page not found"} />} />
-          <RouteOrRedirect path="/c/:conversation_id" isLoading={this.isLoading()} isAuthed={this.isAuthed()}/>
-
-          <PrivateRoute
-            isLoading={this.isLoading()}
-            authed={this.isAuthed()}
+          <Route
             exact
-            path="/" component={IndividualDeliberation}/>
+            path="/understandAI"
+            render={() => <UnderstandAI />}
+          />
 
           <Route
             exact
-            path={["/","/conversations","/integrate", "/account"]}
+            path="/tutorial"
+            render={() => 
+              this.state.response ? this.state.showPoll ?
+              <Redirect to={{ pathname: '/poll'}} /> : this.state.response.user.tutorialprogress >= 10 ? <Redirect to={{ pathname: '/poll'}} /> : <PollTutorial response={this.state.response} setshowPoll={this.setShowPoll}/>   : 
+                <DoesNotExist title={"Please use via a Link"} />// or any other placeholder component
+            }
+          />    
+
+
+            <Route
+            exact
+            path="/poll"
+            render={() => <ConversationUI {...this.state.routeProps} response={this.state.response}/>}
+          />
+
+          <Route
+            exact
+            path="/legal"
+            render={() => <Legal />}
+          />
+
+          <Route
+            exact
+            path="/deliberation"
+            render={() => <Deliberation {...this.props.user} />}
+          />
+
+          <Route
+            exact
+            path="/parameter"
+            render={() => <Parameter {...this.props.user} />}
+          />    
+
+          <Route exact path="/404" render={() => <DoesNotExist title={"Page not found"} />} />
+          <RouteOrRedirect path="/c/:conversation_id" isLoading={this.isLoading()} isAuthed={this.isAuthed()} onResponse={this.handleResponse} setShowPoll={this.setShowPoll} handleRouteProps={this.handleRouteProps} />
+
+          <Route
+            exact
+            path={["/", "/conversations", "/integrate", "/account"]}
             render={(routeProps) => {
               if (routeProps.location.pathname.split('/')[1] === 'm') {
                 return null
@@ -334,7 +406,7 @@ class App extends React.Component {
           />
 
           {/* <Route path="*" render={() => <DoesNotExist title={"Page not found"} />} /> */}
-          <Route exact path="/individualdeliberation" component={IndividualDeliberation}/>
+          <Route exact path="/individualdeliberation" component={IndividualDeliberation} />
           <Redirect to="/404" />
         </Switch>
       </>
