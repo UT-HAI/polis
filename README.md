@@ -78,6 +78,9 @@ cp example.env .env
 
 ```sh
 docker compose up --build
+
+### for dev:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 ```
 
 If you get a permission error, try running this command with `sudo`.
@@ -88,6 +91,9 @@ Once you've built the docker images, you can run without `--build`, which may be
 
 ```sh
 docker compose up
+
+### for dev:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
 or simply
@@ -105,6 +111,10 @@ fully rebuilding them with `--force-recreate`. For example:
 ```sh
 docker compose down
 docker compose up --force-recreate
+
+### or for dev:
+docker compose down
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --force-recreate
 ```
 
 To see what the environment of your containers is going to look like, run:
@@ -133,7 +143,7 @@ make PROD start-rebuild
 
 ### Testing out your instance
 
-You can now test your setup by visiting `http://localhost:80/home`.
+You can now test your setup by visiting `http://localhost:8081/home`.
 
 Once the index page loads, you can create an account using the `/createuser` path.
 You'll be logged in right away; email validation is not required.
