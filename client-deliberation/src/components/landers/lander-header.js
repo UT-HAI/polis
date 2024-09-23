@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Flex, Box, jsx } from 'theme-ui'
 
 import { Link } from 'react-router-dom'
@@ -27,14 +28,19 @@ class Header extends Component {
             </Link>
           </Box>
           <Box>
-            <Link sx={{ variant: 'links.nav' }} to="/signin">
+            {this.props.location?.pathname !== '/signin' ? <Link sx={{ variant: 'links.nav' }} to="/signin">
               Sign in
-            </Link>
+            </Link> :
+              <Link sx={{ variant: 'links.nav' }} to="/createuser">Sign up</Link>}
           </Box>
         </Flex>
       </Box>
     )
   }
+}
+
+Header.propTypes = {
+  location: PropTypes.object
 }
 
 export default Header

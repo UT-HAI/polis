@@ -207,27 +207,18 @@ class App extends React.Component {
   }
 
   render() {
-    const { location } = this.props
     return (
       <>
         <Switch>
           <Redirect from="/:url*(/+)" to={location.pathname.slice(0, -1)} />
+          <Redirect from="/signin/*" to="/signin" />
           <Route exact path="/home" component={Home} />
           <Route
             exact
             path="/signin"
-            render={() => <SignIn {...this.props} authed={this.isAuthed()} />}
-          />
-          <Route
-            exact
-            path="/signin/*"
-            render={() => <SignIn {...this.props} authed={this.isAuthed()} />}
-          />
-          <Route
-            exact
-            path="/signin/**/*"
-            render={() => <SignIn {...this.props} authed={this.isAuthed()} />}
-          />
+          >
+            <SignIn {...this.props} authed={this.isAuthed()} />
+          </Route>
           <Route exact path="/signout" component={SignOut} />
           <Route exact path="/signout/*" component={SignOut} />
           <Route exact path="/signout/**/*" component={SignOut} />
